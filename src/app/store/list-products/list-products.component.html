@@ -1,0 +1,8 @@
+<div class="flex flex-wrap justify-center">
+  @for (product of dataProducts; track $index) {
+  <app-card-products
+    [dataConst]="dataConst"
+    [product]="product"
+  ></app-card-products>
+  }
+</div>
