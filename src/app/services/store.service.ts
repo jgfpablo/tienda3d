@@ -17,4 +17,18 @@ export class StoreService {
   getDataConst(): Observable<any> {
     return this.httpClient.get(this.apiUrl);
   }
+
+  getDataPaginate(paginate: number): Observable<any> {
+    let limit = 6;
+    return this.httpClient.get(
+      `${this.apiUrl}products/?start=${paginate}&limit=${limit}`
+    );
+  }
+
+  getDataPaginateCategory(paginate: number, category: string): Observable<any> {
+    let limit = 6;
+    return this.httpClient.get(
+      `${this.apiUrl}products/category?start=${paginate}&limit=${limit}&category=${category}`
+    );
+  }
 }

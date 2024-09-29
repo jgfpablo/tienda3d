@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StoreService } from '../../services/store.service';
 
 @Component({
   selector: 'app-navbar',
@@ -6,8 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
+  constructor(private storeService: StoreService) {}
+
   open = false;
 
+  category = 'llaveros';
   toggleMenu() {
     this.open = !this.open;
   }

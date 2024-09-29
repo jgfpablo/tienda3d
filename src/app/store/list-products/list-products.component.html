@@ -3,6 +3,22 @@
   <app-card-products
     [dataConst]="dataConst"
     [product]="product"
+    [productPrices]="productPrices[$index]"
   ></app-card-products>
   }
 </div>
+
+<div class="flex justify-center mb-4">
+  @for (item of listPaginacion; track $index) {
+  <button
+    [ngClass]="{ 'bg-slate-300 ': item == paginate }"
+    class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-200 focus:z-20 focus:outline-offset-0"
+    (click)="paginacion(item)"
+  >
+    {{ item + 1 }}
+  </button>
+  }
+</div>
+<!-- <div *ngFor="let item of listPaginacion; let i = index">
+  <button (click)="paginacion(i)">{{ i + 1 }}</button>
+</div> -->
