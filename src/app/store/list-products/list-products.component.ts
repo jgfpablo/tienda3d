@@ -41,15 +41,13 @@ export class ListProductsComponent implements OnInit {
   // Cargar productos según la categoría
   loadProducts(): void {
     if (!this.category) {
-      this.storeService.getDataPaginate(0).subscribe((data) => {
+      this.storeService.Paginar(0).subscribe((data) => {
         this.handleProductResponse(data);
       });
     } else {
-      this.storeService
-        .getDataPaginateCategory(0, this.category)
-        .subscribe((data) => {
-          this.handleProductResponse(data);
-        });
+      this.storeService.Paginar(0, this.category).subscribe((data) => {
+        this.handleProductResponse(data);
+      });
     }
   }
 
@@ -103,18 +101,24 @@ export class ListProductsComponent implements OnInit {
   }
 
   paginacion(paginate: number) {
-    if (!this.category) {
-      this.storeService.getDataPaginate(paginate * 6).subscribe((data) => {
-        this.handleProductResponse(data);
-        this.paginate = paginate;
-      });
-    } else {
-      this.storeService
-        .getDataPaginateCategory(paginate * 6, this.category)
-        .subscribe((data) => {
-          this.handleProductResponse(data);
-          this.paginate = paginate;
-        });
-    }
+    this.storeService.Paginar(paginate * 6, this.category).subscribe((data) => {
+      this.handleProductResponse(data);
+      this.paginate = paginate;
+    });
+    // if (!this.category) {
+    //   console.log('hola');
+    //   this.storeService.Paginar(paginate * 6).subscribe((data) => {
+    //     this.handleProductResponse(data);
+    //     this.paginate = paginate;
+    //   });
+    // } else {
+
+    //   this.storeService
+    //     .Paginar(paginate * 6, this.category)
+    //     .subscribe((data) => {
+    //       this.handleProductResponse(data);
+    //       this.paginate = paginate;
+    //     });
+    // }
   }
 }

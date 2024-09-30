@@ -18,19 +18,16 @@ export class StoreService {
     return this.httpClient.get(this.apiUrl);
   }
 
-  getDataPaginate(paginate: number): Observable<any> {
+  Paginar(paginate: number, category?: string): Observable<any> {
     let limit = 6;
-    return this.httpClient.get(
-      `${this.apiUrl}products/?start=${paginate}&limit=${limit}`
-    );
+    if (category) {
+      return this.httpClient.get(
+        `https://apitest-production-cd29.up.railway.app/category/?category=${category}&start=${paginate}&limit=${limit}`
+      );
+    } else {
+      return this.httpClient.get(
+        `${this.apiUrl}products/?start=${paginate}&limit=${limit}`
+      );
+    }
   }
-
-  getDataPaginateCategory(paginate: number, category: string): Observable<any> {
-    let limit = 6;
-    return this.httpClient.get(
-      `https://apitest-production-cd29.up.railway.app/category/?category=${category}&start=${paginate}&limit=${limit}`
-    );
-  }
-
-  // products/category?category=llavero
 }

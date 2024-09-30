@@ -9,7 +9,6 @@ const routes: Routes = [
     component: ListProductsComponent,
     pathMatch: 'full',
   },
-
   { path: 'product/:price/:product.id', component: ProductComponent },
   { path: 'category/:category', component: ListProductsComponent },
 ];
