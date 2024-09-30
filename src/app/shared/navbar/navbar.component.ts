@@ -7,11 +7,7 @@ import { StoreService } from '../../services/store.service';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  constructor(private storeService: StoreService) {}
-
   open = false;
-
-  category = 'llaveros';
   toggleMenu() {
     this.open = !this.open;
   }

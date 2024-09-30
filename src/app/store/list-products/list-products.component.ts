@@ -50,6 +50,7 @@ export class ListProductsComponent {
             this.listPaginacion[index] = index;
           }
         });
+      console.log(this.category);
     }
 
     storeService.getDataConst().subscribe((data) => {
