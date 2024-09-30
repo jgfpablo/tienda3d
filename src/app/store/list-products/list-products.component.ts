@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { Products } from '../../Interfaces/products.interface';
 import { ConstData } from '../../Interfaces/const.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-list-products',
@@ -20,14 +21,36 @@ export class ListProductsComponent {
 
   listPaginacion: number[] = [];
 
-  constructor(private storeService: StoreService) {
-    storeService.getDataPaginate(0).subscribe((data) => {
-      this.dataProducts = data.data;
+  category: string = ''; //esta variable contendra la categoria a buscar
 
-      for (let index = 0; index < data.total / 6; index++) {
-        this.listPaginacion[index] = index;
-      }
+  constructor(
+    private storeService: StoreService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.params.subscribe((params) => {
+      this.category = params['category']; // 'category' es el nombre del parámetro en la ruta
     });
+
+    if (!this.category) {
+      storeService.getDataPaginate(0).subscribe((data) => {
+        this.dataProducts = data.data;
+
+        for (let index = 0; index < data.total / 6; index++) {
+          this.listPaginacion[index] = index;
+        }
+      });
+    } else {
+      //get data by category
+      storeService
+        .getDataPaginateCategory(0, this.category)
+        .subscribe((data) => {
+          this.dataProducts = data.data;
+
+          for (let index = 0; index < data.total / 6; index++) {
+            this.listPaginacion[index] = index;
+          }
+        });
+    }
 
     storeService.getDataConst().subscribe((data) => {
       this.dataConst = data.data;
@@ -41,6 +64,7 @@ export class ListProductsComponent {
       setTimeout(() => this.calcular(), 500);
       return;
     }
+    console.log(this.dataProducts);
 
     this.dataProducts.forEach((product) => {
       if (product.precio == 0) {
@@ -109,20 +133,20 @@ export class ListProductsComponent {
   }
 
   paginacion(paginate: number) {
-    this.storeService.getDataPaginate(paginate * 6).subscribe((data) => {
-      this.dataProducts = data.data;
-      this.calcular();
-      this.paginate = paginate;
-    });
-  }
-
-  getDataCategory(paginate: number) {
-    this.storeService
-      .getDataPaginateCategory(paginate * 6, 'llaveros')
-      .subscribe((data) => {
+    if (!this.category) {
+      this.storeService.getDataPaginate(paginate * 6).subscribe((data) => {
         this.dataProducts = data.data;
         this.calcular();
         this.paginate = paginate;
       });
+    } else {
+      this.storeService
+        .getDataPaginateCategory(paginate * 6, 'llaveros')
+        .subscribe((data) => {
+          this.dataProducts = data.data;
+          this.calcular();
+          this.paginate = paginate;
+        });
+    }
   }
 }

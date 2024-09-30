@@ -28,7 +28,9 @@ export class StoreService {
   getDataPaginateCategory(paginate: number, category: string): Observable<any> {
     let limit = 6;
     return this.httpClient.get(
-      `${this.apiUrl}products/category?start=${paginate}&limit=${limit}&category=${category}`
+      `https://apitest-production-cd29.up.railway.app/category/?category=${category}&start=${paginate}&limit=${limit}`
     );
   }
+
+  // products/category?category=llavero
 }
