@@ -42,6 +42,7 @@ export class ListProductsComponent implements OnInit {
   // Cargar productos según la categoría
   loadProducts(): void {
     this.listPaginacion = [];
+    this.paginate = 0;
     if (!this.category) {
       this.storeService.Paginar(0).subscribe((data) => {
         this.handleProductResponse(data);
