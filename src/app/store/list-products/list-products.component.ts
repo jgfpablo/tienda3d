@@ -26,6 +26,7 @@ export class ListProductsComponent implements OnInit {
 
   ngOnInit(): void {
     // Obtener la categoría desde la URL
+
     this.activatedRoute.params.subscribe((params) => {
       this.category = params['category'];
       this.loadProducts();
@@ -40,6 +41,7 @@ export class ListProductsComponent implements OnInit {
 
   // Cargar productos según la categoría
   loadProducts(): void {
+    this.listPaginacion = [];
     if (!this.category) {
       this.storeService.Paginar(0).subscribe((data) => {
         this.handleProductResponse(data);
@@ -105,20 +107,5 @@ export class ListProductsComponent implements OnInit {
       this.handleProductResponse(data);
       this.paginate = paginate;
     });
-    // if (!this.category) {
-    //   console.log('hola');
-    //   this.storeService.Paginar(paginate * 6).subscribe((data) => {
-    //     this.handleProductResponse(data);
-    //     this.paginate = paginate;
-    //   });
-    // } else {
-
-    //   this.storeService
-    //     .Paginar(paginate * 6, this.category)
-    //     .subscribe((data) => {
-    //       this.handleProductResponse(data);
-    //       this.paginate = paginate;
-    //     });
-    // }
   }
 }
