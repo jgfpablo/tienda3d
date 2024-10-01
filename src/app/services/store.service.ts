@@ -30,4 +30,8 @@ export class StoreService {
       );
     }
   }
+
+  addProduct(product: any) {
+    return this.httpClient.post(`${this.apiUrl}products`, product);
+  }
 }

@@ -4,9 +4,17 @@ import { ListProductsComponent } from './list-products/list-products.component';
 import { ProductComponent } from './product/product.component';
 import { RouterLink, RouterModule } from '@angular/router';
 import { ComponentsModule } from '../components/components.module';
+import { AddProductComponent } from './add-product/add-product.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [ListProductsComponent, ProductComponent],
-  imports: [CommonModule, RouterModule, RouterLink, ComponentsModule],
+  declarations: [ListProductsComponent, ProductComponent, AddProductComponent],
+  imports: [
+    CommonModule,
+    RouterModule,
+    RouterLink,
+    ComponentsModule,
+    FormsModule,
+  ],
 })
 export class StoreModule {}
