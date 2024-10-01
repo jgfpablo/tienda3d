@@ -115,7 +115,11 @@
           <img [src]="item" alt="Imagen convertida a WebP" />
           } -->
           <div *ngFor="let item of imagenes; let i = index">
-            <img [src]="item" alt="Imagen convertida a WebP" />
+            <img
+              (click)="eliminarImagen(i)"
+              [src]="item"
+              alt="Imagen convertida a WebP"
+            />
           </div>
         </div>
 

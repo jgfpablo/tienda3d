@@ -38,6 +38,10 @@ export class AddProductComponent {
     this.color = '';
   }
 
+  eliminarImagen(num: number) {
+    this.imagenes.splice(num, 1);
+  }
+
   addProduct(product: any) {
     this.storeService.addProduct(product).subscribe(
       (response) => {
