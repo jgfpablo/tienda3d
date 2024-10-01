@@ -26,6 +26,7 @@ export class AddProductComponent {
     oferta: 'si',
     precio: 0,
     categoria: '',
+    imagenes: this.imagenes,
   };
 
   quitarColor(num: number) {
@@ -56,8 +57,8 @@ export class AddProductComponent {
   //   }
   // }
 
-  guardarImagen(event: Event) {
-    const input = event.target as HTMLInputElement;
+  guardarImagen(input: HTMLInputElement) {
+    // const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       this.image = file;
@@ -87,13 +88,14 @@ export class AddProductComponent {
           // this.imgSize = this.calcularTamanoBase64(webpImage);
           // console.log(`Tamaño de la imagen WebP en Base64: ${this.imgSize} KB`);
           this.imageBase64 = webpImage;
+
+          this.imagenes.push(this.imageBase64);
+          // console.log(this.imagenes);
+          this.imageBase64 = '';
         }
       };
     };
     reader.readAsDataURL(this.image); // Leer la imagen como URL
-    this.imagenes.push(this.imageBase64);
-    console.log(this.imageBase64);
-    this.imageBase64 = '';
   }
 
   // calcularTamanoBase64(base64String: string): number {

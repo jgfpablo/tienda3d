@@ -105,10 +105,9 @@
             name="image"
             type="file"
             accept="image/png, image/jpeg"
-            (change)="guardarImagen($event)"
           />
 
-          <button>Aplicar</button>
+          <button (click)="guardarImagen(InputImage)">Aplicar</button>
 
           <!-- <img [src]="imageBase64" alt="Imagen convertida a WebP" /> -->
 
