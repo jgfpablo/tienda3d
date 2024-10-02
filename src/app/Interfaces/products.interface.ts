@@ -13,6 +13,8 @@ export interface Products {
   colores: Colors[];
   oferta: number;
   precio: number;
+  categoria: string;
+  imagenes: string[];
 }
 
 export enum Colors {
@@ -30,4 +32,6 @@ export interface Product {
   colores: Colors[];
   oferta: number;
   precio: number;
+  categoria: string;
+  imagenes: string[];
 }

@@ -8,7 +8,7 @@ import { ConstData } from '../../Interfaces/const.interface';
   styleUrl: './card-products.component.scss',
 })
 export class CardProductsComponent {
-  @Input() product: Products | undefined;
+  @Input() product: Products | null = null;
   @Input() dataConst: ConstData | undefined;
   @Input() productPrices: any;
 

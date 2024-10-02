@@ -2,6 +2,9 @@
   Producto
 
   <div>{{ product.descripcion }}</div>
-</h1>
 
-<!-- <h1>{{ product }}</h1> -->
+  @if(product && product.imagenes && product.imagenes.length > 0){ @for (item of
+  product.imagenes; track $index) {
+  <img [src]="item" alt="card-image" class="object-cover w-full h-full" />
+  } }
+</h1>
