@@ -1,7 +1,7 @@
-export interface Products {
+export interface ProductResponse {
   message: string;
   status: string;
-  data: Products[];
+  data: Products; // Aquí 'Products' debe ser tu interfaz de producto
 }
 
 export interface Products {
@@ -19,4 +19,15 @@ export enum Colors {
   Azul = 'azul',
   Rojo = 'rojo',
   Verde = 'verde',
+}
+
+export interface Product {
+  id: number;
+  nombre: string;
+  peso: number;
+  tiempo: number;
+  descripcion: string;
+  colores: Colors[];
+  oferta: number;
+  precio: number;
 }
