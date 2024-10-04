@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
+import { ConstData } from '../../Interfaces/const.interface';
 
 @Component({
   selector: 'app-add-product',
@@ -9,8 +10,18 @@ import { StoreService } from '../../services/store.service';
 export class AddProductComponent {
   constructor(private storeService: StoreService) {}
 
+  ngOnInit(): void {
+    this.storeService.getDataConst().subscribe((data) => {
+      this.dataConst = data.data;
+    });
+  }
+
+  dataConst: ConstData | undefined;
+
   color: string = '';
   colores: string[] = [];
+  horas: number = 0;
+  minutos: number = 0;
   image: any = undefined;
   imageBase64: string = '';
   imagenes: string[] = [];
@@ -19,8 +30,8 @@ export class AddProductComponent {
   product = {
     id: '0',
     nombre: '',
-    peso: '',
-    tiempo: '',
+    peso: 0,
+    tiempo: 0,
     descripcion: '',
     colores: this.colores,
     oferta: 'si',
@@ -42,8 +53,10 @@ export class AddProductComponent {
     this.imagenes.splice(num, 1);
   }
 
-  addProduct(product: any) {
-    this.storeService.addProduct(product).subscribe(
+  addProduct() {
+    this.calcularPreciosProductos();
+    this.calcularTiempo();
+    this.storeService.addProduct(this.product).subscribe(
       (response) => {
         console.log('Producto agregado:', response);
       },
@@ -53,16 +66,9 @@ export class AddProductComponent {
     );
   }
 
-  // capturarImagen(event: Event) {
-  //   const input = event.target as HTMLInputElement;
-  //   if (input.files && input.files.length > 0) {
-  //     const file = input.files[0];
-  //     this.image = file;
-  //   }
-  // }
-
   guardarImagen(input: HTMLInputElement) {
-    // const input = event.target as HTMLInputElement;
+    this.calcularTiempo();
+    this.calcularPreciosProductos();
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       this.image = file;
@@ -109,4 +115,53 @@ export class AddProductComponent {
   //   const sizeInKB = sizeInBytes / 1024; // Convertir a KB
   //   return sizeInKB;
   // }
+
+  calcularPreciosProductos() {
+    const KwH =
+      (Number(this.dataConst?.consumoKw) / 1000 / 60) *
+      Number(this.product.tiempo);
+    const costoEnergia = KwH * this.dataConst?.costokwH!;
+    const costoFilamento =
+      (Number(this.product?.peso) * Number(this.dataConst?.filamento)) / 1000;
+    const depreciacion =
+      (Number(this.dataConst?.costImpr) /
+        Number(this.dataConst?.vidaUtil) /
+        60) *
+      Number(this.product?.tiempo);
+    const merma =
+      (Number(this.product?.peso) *
+        (Number(this.dataConst?.merma) / 100) *
+        Number(this.dataConst?.filamento)) /
+      1000;
+    const ganancia =
+      (costoEnergia + costoFilamento + depreciacion + merma) *
+      (this.dataConst?.ganan! / 100);
+    const gastos = costoEnergia + costoFilamento + depreciacion + merma;
+
+    let total = gastos + ganancia;
+
+    if (total < 200) {
+      this.product.precio = 200;
+    } else {
+      this.product.precio = this.redondear(total);
+    }
+
+    // console.log('KWH = ' + KwH);
+    // console.log('Costo Energia = ' + costoEnergia);
+    // console.log('Costo Filamento = ' + costoFilamento);
+    // console.log('depreciacion = ' + depreciacion);
+    // console.log('merma = ' + merma);
+    // console.log('ganancia = ' + ganancia);
+    // console.log('gastos = ' + gastos);
+    // console.log('total = ' + total);
+  }
+
+  redondear(numero: number): number {
+    const redondeo50 = Math.ceil(numero / 50) * 50;
+    return redondeo50 % 100 === 0 ? redondeo50 : redondeo50;
+  }
+
+  calcularTiempo() {
+    this.product.tiempo = Number(this.horas) * 60 + Number(this.minutos);
+  }
 }
