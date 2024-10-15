@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { ConstData } from '../../Interfaces/const.interface';
+import { Categorias } from '../../Interfaces/products.interface';
 
 @Component({
   selector: 'app-add-product',
@@ -14,10 +15,16 @@ export class AddProductComponent {
     this.storeService.getDataConst().subscribe((data) => {
       this.dataConst = data.data;
     });
+    this.storeService.getCategorias().subscribe((resp) => {
+      this.categorias = resp.data.categorias;
+    });
   }
+
+  categorias: Categorias[] = [];
 
   dataConst: ConstData | undefined;
 
+  categoria = 'Llaveros';
   color: string = '';
   colores: string[] = [];
   horas: number = 0;
@@ -54,6 +61,7 @@ export class AddProductComponent {
   }
 
   addProduct() {
+    this.product.categoria = this.categoria;
     this.calcularPreciosProductos();
     this.calcularTiempo();
     this.storeService.addProduct(this.product).subscribe(

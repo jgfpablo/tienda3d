@@ -1,4 +1,4 @@
-import { Component, Input, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Products } from '../../Interfaces/products.interface';
 import { ConstData } from '../../Interfaces/const.interface';
 
@@ -12,5 +12,12 @@ export class CardProductsComponent {
   @Input() dataConst: ConstData | undefined;
   @Input() productPrices: any;
 
+  @Output() textTruncated = new EventEmitter<boolean>();
+
   description = false;
+
+  toogleDescription(value: boolean) {
+    this.description = value;
+    this.textTruncated.emit(this.description);
+  }
 }

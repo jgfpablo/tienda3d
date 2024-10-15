@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ProductResponse } from '../Interfaces/products.interface';
+import {
+  CategoriasResponse,
+  ProductResponse,
+} from '../Interfaces/products.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -40,5 +43,9 @@ export class StoreService {
     return this.httpClient.get<ProductResponse>(
       `${this.apiUrl}product?id=${num}`
     );
+  }
+
+  getCategorias(): Observable<CategoriasResponse> {
+    return this.httpClient.get<CategoriasResponse>(`${this.apiUrl}categorias`);
   }
 }

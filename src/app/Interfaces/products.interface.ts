@@ -35,3 +35,15 @@ export interface Product {
   categoria: string;
   imagenes: string[];
 }
+
+export interface CategoriasResponse {
+  message: string;
+  status: string;
+  data: {
+    categorias: Categorias[];
+  };
+}
+export interface Categorias {
+  id: string;
+  nombre: string;
+}

@@ -56,4 +56,9 @@ export class ListProductsComponent implements OnInit {
       this.paginate = paginate;
     });
   }
+
+  onChangeTruncated(truncated: boolean) {
+    this.description = truncated;
+    console.log(this.description);
+  }
 }

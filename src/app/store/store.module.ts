@@ -6,9 +6,10 @@ import { RouterLink, RouterModule } from '@angular/router';
 import { ComponentsModule } from '../components/components.module';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
-  declarations: [ListProductsComponent, ProductComponent, AddProductComponent],
+  declarations: [ListProductsComponent, ProductComponent, AddProductComponent, HomePageComponent],
   imports: [
     CommonModule,
     RouterModule,

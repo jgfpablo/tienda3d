@@ -1,0 +1,43 @@
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+
+.img {
+  width: 800;
+  height: 600;
+}
+
+h1 {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+}
+
+span {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-size: 36px;
+  color: rgb(2, 105, 2);
+}
+
+.btn-left {
+  position: absolute; /* Posicionamos el botón de manera absoluta */
+  top: 50%; /* Alinea el botón verticalmente en el centro */
+  left: 10px; /* Posiciona el botón a la izquierda con un margen */
+  transform: translateY(-50%); /* Ajusta el botón para centrarlo */
+  padding: 5px 10px;
+}
+
+.visualizer {
+  position: absolute;
+  left: 150px;
+}
+
+.btn-right {
+  position: absolute; /* Posicionamos el botón de manera absoluta */
+  top: 50%; /* Alinea el botón verticalmente en el centro */
+  right: 10px; /* Posiciona el botón a la derecha con un margen */
+  transform: translateY(-50%); /* Ajusta el botón para centrarlo */
+  padding: 5px 10px;
+}
+
+.h92 {
+  height: 92%;
+}

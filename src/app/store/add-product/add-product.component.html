@@ -87,24 +87,15 @@
           </div>
         </div>
 
-        <!-- <div class="mb-4">
-          <label class="block text-grey-darker text-sm font-bold mb-2"
-            >Precio</label
-          >
-          <input
-            [(ngModel)]="product.precio"
-            class="border rounded w-full py-2 px-3 text-grey-darker"
-          />
-        </div> -->
-
         <div class="mb-4">
           <label class="block text-grey-darker text-sm font-bold mb-2"
             >Categoria</label
           >
-          <input
-            [(ngModel)]="product.categoria"
-            class="border rounded w-full py-2 px-3 text-grey-darker"
-          />
+          <select [(ngModel)]="categoria">
+            <option *ngFor="let cat of categorias || []" [value]="cat.nombre">
+              {{ cat.nombre }}
+            </option>
+          </select>
         </div>
 
         <div class="mb-4">

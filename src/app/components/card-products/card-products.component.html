@@ -1,6 +1,6 @@
 <div
   class="flex justify-center items-center size-card m-4"
-  [routerLink]="['/product', productPrices, product?.id]"
+  [routerLink]="['/product', product?.id]"
 >
   <div class="max-w-[720px] mx-auto">
     <div
@@ -38,8 +38,8 @@
         </div>
         <p
           class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75"
-          (mouseenter)="description = true"
-          (mouseleave)="description = false"
+          (mouseenter)="toogleDescription(true)"
+          (mouseleave)="toogleDescription(false)"
           [ngClass]="{
             truncate: !description,
             'whitespace-normal': description

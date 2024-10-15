@@ -3,14 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 import { ListProductsComponent } from './store/list-products/list-products.component';
 import { ProductComponent } from './store/product/product.component';
 import { AddProductComponent } from './store/add-product/add-product.component';
+import { HomePageComponent } from './store/home-page/home-page.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ListProductsComponent,
+    component: HomePageComponent,
     pathMatch: 'full',
   },
-  { path: 'product/:price/:id', component: ProductComponent },
+  {
+    path: 'AllProducts',
+    component: ListProductsComponent,
+  },
+  { path: 'product/:id', component: ProductComponent },
   { path: 'category/:category', component: ListProductsComponent },
 
   { path: 'addProductCosas', component: AddProductComponent },
