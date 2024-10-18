@@ -1,24 +1,13 @@
-<!-- @if(product && product.imagenes && product.imagenes.length > 0){ @for (item of
-product.imagenes; track $index) { } }
-        <button (click)="showImg('-')"><</button>
-        @if(product && product.imagenes && product.imagenes.length > 0){
-        <div class="w-2/5">
-          <img
-            [src]="product.imagenes[numberPhoto]"
-            class="h-full object-scale-down p-8"
-            alt="card-image"
-            loading="lazy"
-          />
-        </div>
-        <button (click)="showImg('+')">></button>
-        } -->
-
-<div class="w-full h-full flex justify-center items-center bg-slate-200">
-  <div class="w-5/6 bg-white shadow-2xl rounded-lg overflow-hidden p-6">
+<div
+  class="w-full h-full flex justify-center items-center bg-slate-200 bg-image"
+>
+  <div
+    class="w-5/6 colr shadow-2xl rounded-lg overflow-hidden p-6 border border-green-400"
+  >
     <div class="flex">
       <div class="visualizer">
-        @if(product && product.imagenes && product.imagenes.length > 0){ @for
-        (item of product.imagenes; track $index) {
+        @if(product && product.imagenes){ @for (item of product.imagenes; track
+        $index) {
         <img
           (click)="showImgPhoto($index)"
           [src]="item"
@@ -30,9 +19,6 @@ product.imagenes; track $index) { } }
         } }
       </div>
 
-      <!-- @if(product && product.imagenes && product.imagenes.length > 0){ @for
-        (item of product.imagenes; track $index) { } } @if(product &&
-        product.imagenes && product.imagenes.length > 0){ -->
       <div class="w-4/6 flex items-center justify-center">
         @if(product && product.imagenes && product.imagenes.length > 0){
         <div class="flex justify-center relative">
@@ -73,24 +59,24 @@ product.imagenes; track $index) { } }
       </div>
 
       <div class="w-2/6 flex justify-center items-center">
-        <div class="border w-11/12 rounded-md">
-          <h1 class="text-2xl p-4 text-center font-bold">
-            {{ product.nombre }}
+        <div class="border border-green-400 w-11/12 rounded-md">
+          <h1 class="text-2xl p-4 text-center font-bold text-green-400">
+            {{ product?.nombre }}
           </h1>
 
           <div class="flex justify-center">
-            <span class="font-semibold">${{ product.precio }}</span>
+            <span class="font-semibold">${{ product?.precio }}</span>
           </div>
 
           <div class="flex justify-center items-center m-4">
-            <p class="font-medium text-gray-700">{{ product.descripcion }}</p>
+            <p class="font-medium text-green-400">{{ product?.descripcion }}</p>
           </div>
 
           @if(product && product.colores && product.colores.length > 0){
           <div class="flex flex-col justify-center items-center">
-            <h3>Colores Disponibles</h3>
+            <h3 class="text-green-400">Colores Disponibles</h3>
 
-            <p class="font-medium text-gray-700">{{ product.colores }}</p>
+            <p class="font-medium text-green-700">{{ product.colores }}</p>
           </div>
           }
 
@@ -98,7 +84,7 @@ product.imagenes; track $index) { } }
             <a
               [href]="
                 'https://wa.me/+543764172282?text=Hola le escribo por el producto : ' +
-                product.nombre
+                product?.nombre
               "
               class="flex w-3/6 items-center hover:cursor-pointer justify-center text-green-700 bg-green-200 border border-green-400 hover:border-green-600 hover:text-green-900 hover:bg-green-400"
               target="_blank"
@@ -120,35 +106,3 @@ product.imagenes; track $index) { } }
     </div>
   </div>
 </div>
-
-<!-- 
-
-<div class="w-full h-full flex justify-center items-center bg-slate-200">
-  <div class="w-5/6 h-5/6 bg-white">
-    <div class="flex">
-
-      <div class="bg-red-900 w-1/2 flex justify-center items-center">
-      
-        @if(product && product.imagenes && product.imagenes.length > 0) {
-        <div class="flex justify-center items-center relative">
-        
-          <button class="btn-left" (click)="showImg('-')"><</button>
-          <div class="img">
-            <img
-              [src]="product.imagenes[numberPhoto]"
-              class="h-full w-full object-cover"
-              alt="card-image"
-              loading="lazy"
-            />
-          </div>
-          <button class="btn-right" (click)="showImg('+')">></button>
-        </div>
-        }
-      </div>
-      <div class="bg-black w-1/2 flex justify-center items-center">
-        
-        <p class="text-white">{{ product.nombre }}</p>
-      </div>
-    </div>
-  </div>
-</div> -->

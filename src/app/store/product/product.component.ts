@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { ActivatedRoute } from '@angular/router';
-import { Product, Products } from '../../Interfaces/products.interface';
+import { Products } from '../../Interfaces/products.interface';
 
 @Component({
   selector: 'app-product',
@@ -13,21 +13,19 @@ export class ProductComponent {
     private service: StoreService,
     private activatedRoute: ActivatedRoute
   ) {}
-  // price: string = '';
-  id: number = 0;
-  product: Partial<Products> = {};
+  name: string = '';
+
+  product?: Products;
 
   photo: number = 0;
   numberPhoto: number = 0;
 
   ngOnInit(): void {
-    const idParam = this.activatedRoute.snapshot.paramMap.get('id');
-    this.id = Number(idParam);
+    this.name = this.activatedRoute.snapshot.paramMap.get('name')!;
 
-    this.service.getDataById(this.id).subscribe((resp) => {
-      this.product = resp.data;
-      this.photo = resp.data.imagenes.length - 1;
-      console.log(this.product);
+    this.service.getProductByName(this.name).subscribe((resp) => {
+      this.product = resp[0];
+      this.photo = resp[0].imagenes?.length! - 1;
     });
   }
 

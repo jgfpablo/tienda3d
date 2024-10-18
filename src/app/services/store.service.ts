@@ -1,51 +1,49 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import {
-  CategoriasResponse,
-  ProductResponse,
-} from '../Interfaces/products.interface';
+import { Category } from '../Interfaces/category.interface';
+import { ConstData } from '../Interfaces/const.interface';
+import { Products } from '../Interfaces/products.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StoreService {
   constructor(private httpClient: HttpClient) {}
+  apiUrl = 'https://storeapi-production-1f58.up.railway.app/apiStore/';
 
-  apiUrl = 'https://apitest-production-cd29.up.railway.app/';
-
-  getData(): Observable<any> {
-    return this.httpClient.get(this.apiUrl + 'products');
+  getData(): Observable<Products> {
+    return this.httpClient.get<Products>(`${this.apiUrl}products/ `);
   }
 
-  getDataConst(): Observable<any> {
-    return this.httpClient.get(this.apiUrl);
+  getDataConst(): Observable<ConstData[]> {
+    return this.httpClient.get<ConstData[]>(`${this.apiUrl}constData/`);
   }
 
-  Paginar(paginate: number, category?: string): Observable<any> {
+  Paginar(paginate: number, category?: string): Observable<Products> {
     let limit = 6;
     if (category) {
-      return this.httpClient.get(
-        `https://apitest-production-cd29.up.railway.app/category/?category=${category}&start=${paginate}&limit=${limit}`
+      return this.httpClient.get<Products>(
+        `${this.apiUrl}products/paginate?category=${category}&start=${paginate}&limit=${limit}`
       );
     } else {
-      return this.httpClient.get(
+      return this.httpClient.get<Products>(
         `${this.apiUrl}products/?start=${paginate}&limit=${limit}`
       );
     }
   }
 
-  addProduct(product: any) {
-    return this.httpClient.post(`${this.apiUrl}products`, product);
+  addProduct(product: Products) {
+    return this.httpClient.post(`${this.apiUrl}products/product`, product);
   }
 
-  getDataById(num: number): Observable<ProductResponse> {
-    return this.httpClient.get<ProductResponse>(
-      `${this.apiUrl}product?id=${num}`
+  getProductByName(name: string): Observable<Products[]> {
+    return this.httpClient.get<Products[]>(
+      `${this.apiUrl}products/name?name=${name}`
     );
   }
 
-  getCategorias(): Observable<CategoriasResponse> {
-    return this.httpClient.get<CategoriasResponse>(`${this.apiUrl}categorias`);
+  getCategorias(): Observable<Category[]> {
+    return this.httpClient.get<Category[]>(`${this.apiUrl}categories/`);
   }
 }

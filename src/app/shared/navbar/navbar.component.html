@@ -53,11 +53,11 @@
         </div>
         <div class="hidden sm:ml-6 sm:block">
           <div class="flex space-x-4">
-            @for (item of categorias; track $index) {
+            @for (category of categories; track $index) {
             <a
               class="block rounded-md px-3 py-8 text-base font-medium text-green-400 hover:bg-gray-700 hover:text-white"
-              [routerLink]="['/category', getCategoryName(item.nombre)]"
-              >{{ agregarEspacios(item.nombre) }}</a
+              [routerLink]="['/category', getCategoryName(category.nombre)]"
+              >{{ agregarEspacios(category.nombre) }}</a
             >
             }
           </div>
@@ -76,11 +76,11 @@
           >Inicio</a
         >
 
-        @for (item of categorias; track $index) {
+        @for (category of categories; track $index) {
         <a
           class="block rounded-md px-3 py-2 text-base font-medium text-green-200 hover:bg-gray-700 hover:text-white"
-          [routerLink]="['/category', getCategoryName(item.nombre)]"
-          >{{ item.nombre }}</a
+          [routerLink]="['/category', getCategoryName(category.nombre)]"
+          >{{ category.nombre }}</a
         >
         }
       </div>

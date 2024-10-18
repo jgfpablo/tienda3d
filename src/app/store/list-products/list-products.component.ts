@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../../services/store.service';
-import { Products } from '../../Interfaces/products.interface';
 import { ConstData } from '../../Interfaces/const.interface';
 import { ActivatedRoute } from '@angular/router';
+import { Products } from '../../Interfaces/products.interface';
 
 @Component({
   selector: 'app-list-products',
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./list-products.component.scss'],
 })
 export class ListProductsComponent implements OnInit {
-  dataProducts: Products[] = [];
+  productsList: Products[] = [];
   dataConst: ConstData | undefined;
 
   description = false;
@@ -35,16 +35,18 @@ export class ListProductsComponent implements OnInit {
     if (!this.category) {
       this.storeService.Paginar(0).subscribe((data) => {
         this.handleProductResponse(data);
+        console.log(data);
       });
     } else {
       this.storeService.Paginar(0, this.category).subscribe((data) => {
         this.handleProductResponse(data);
+        console.log(data);
       });
     }
   }
 
   handleProductResponse(data: any): void {
-    this.dataProducts = data.data;
+    this.productsList = data.data;
     for (let index = 0; index < data.total / 6; index++) {
       this.listPaginacion[index] = index;
     }
