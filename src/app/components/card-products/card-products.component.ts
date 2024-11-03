@@ -21,4 +21,16 @@ export class CardProductsComponent {
     this.description = value;
     this.textTruncated.emit(this.description);
   }
+
+  limitarCaracteres(texto: string, limite: number): string {
+    if (typeof texto !== 'string') {
+      throw new Error('El argumento debe ser una cadena de texto.');
+    }
+
+    if (texto.length <= limite) {
+      return texto; // Devuelve el texto original si es más corto que el límite
+    }
+
+    return texto.slice(0, limite) + '...'; // Corta el texto y añade "..."
+  }
 }

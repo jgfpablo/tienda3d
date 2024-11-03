@@ -1,12 +1,48 @@
 .size-card {
-  width: 384px;
-  height: 588px;
+  // width: 384px;
+  // height: 588px;
   //   min-width: 384px;
   //   min-height: 588px;
   //   max-width: 384px;
   //   max-height: 588px;
 }
 
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Ajusta automáticamente las columnas */
+  gap: 1rem; /* Espacio entre las tarjetas */
+}
+
+.card {
+  padding: 1.5rem;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
 .whitespace-normal {
   white-space: normal;
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: whitesmoke;
+}
+
+img {
+  filter: drop-shadow(-5px 5px 23px #0008ff);
+}
+
+.bg {
+  background-color: black;
+  border-radius: 5%;
+  margin: 20px;
 }

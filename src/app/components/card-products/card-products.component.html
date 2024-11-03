@@ -1,45 +1,45 @@
 <div
-  class="flex justify-center items-center size-card m-4"
+  class="flex justify-center items-center size-card m-4 glass"
   [routerLink]="['/product', product?.nombre]"
+  [ngClass]="{ 'mb-10 ': description == true }"
 >
-  <!-- [routerLink]="['/product', product?.id]" -->
-
   <div class="max-w-[720px] mx-auto">
     <div
-      class="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96"
+      class="relative flex flex-col shadow-md bg-clip-border rounded-xl w-96"
     >
       <div
-        class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white bg-clip-border rounded-xl h-96"
+        class="relative mx-4 mt-4 overflow-hidden bg-clip-border rounded-xl h-96 bg"
       >
         @if(product && product.imagenes && product.imagenes.length > 0){
         <img
           [src]="product.imagenes[0]"
           alt="card-image"
-          class="object-cover w-full h-full"
+          class="object-contain w-full h-full"
         />
         /> }@else {
         <img
           src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
           alt="card-image"
-          class="object-cover w-full h-full"
+          class="object-cover w-full h-full img"
         />
         }
       </div>
       <div class="p-6">
         <div class="flex items-center justify-between mb-2">
           <p
-            class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900"
+            class="block font-sans text-base antialiased font-medium leading-relaxed product-title"
           >
             {{ product?.nombre }}
           </p>
           <p
-            class="block font-sans text-base antialiased font-medium leading-relaxed text-blue-gray-900"
+            class="block font-sans text-base antialiased font-medium leading-relaxed product-price"
           >
             ${{ product?.precio }}
           </p>
         </div>
+
         <p
-          class="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75"
+          class="block font-sans text-sm antialiased font-normal leading-normal opacity-75"
           (mouseenter)="toogleDescription(true)"
           (mouseleave)="toogleDescription(false)"
           [ngClass]="{
@@ -47,7 +47,7 @@
             'whitespace-normal': description
           }"
         >
-          {{ product?.descripcion }}
+          {{ limitarCaracteres(product!.descripcion, 100) }}
         </p>
       </div>
       <div class="p-6 pt-0">

@@ -1,11 +1,3 @@
-.background {
-  background-color: rgb(13, 13, 13);
-}
-
-.bg-image {
-  background-image: url("../../../assets/img/hero-bg.png");
-}
-
 .fade-in {
   animation: fade-in 3s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
@@ -34,4 +26,12 @@
   100% {
     opacity: 1;
   }
+}
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }

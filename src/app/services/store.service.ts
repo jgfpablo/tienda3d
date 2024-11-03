@@ -85,15 +85,35 @@ export class StoreService {
       .pipe(catchError(this.handleError));
   }
 
-  addCategory(category: any) {
+  addCategory(category: Category) {
     const token = localStorage.getItem('token'); // O el método que uses para obtener el token
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`, // Añadimos el token en el encabezado
     });
 
+    console.log(category.nombre);
+    category.nombre = this.formatCategory(category.nombre);
+
     return this.httpClient
       .post(`${this.apiUrl}categories/category`, category, { headers })
       .pipe(catchError(this.handleError));
+  }
+
+  formatCategory(name: string): string {
+    // Verifica si 'name' es una cadena
+    if (typeof name !== 'string') {
+      throw new Error('El argumento debe ser una cadena de texto.');
+    }
+
+    // Eliminar espacios y dividir en palabras
+    const palabras = name.split(/\s+/);
+
+    // Capitalizar la primera letra de cada palabra y unirlas sin espacios
+    const resultado = palabras
+      .map((palabra) => palabra.charAt(0).toUpperCase() + palabra.slice(1))
+      .join('');
+
+    return resultado;
   }
 
   private handleError(error: HttpErrorResponse) {
