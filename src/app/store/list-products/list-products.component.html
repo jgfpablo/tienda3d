@@ -8,14 +8,14 @@
 </div>
 
 <div class="flex justify-center mb-4">
-  @for (item of listPaginacion; track $index) {
+  @if (totalPages != 0) { @for ( item of paginacion; track totalPages) {
   <button
     [ngClass]="{ 'bg-slate-300 ': item == paginate }"
     [ngClass]="{ 'mt-20 ': description == true }"
     class="relative inline-flex items-center px-4 bg-slate-200 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-slate-600 hover:bg-slate-400 focus:z-20 focus:outline-offset-0"
-    (click)="paginacion(item)"
+    (click)="cambiarPagina(item - 1)"
   >
-    {{ item + 1 }}
+    {{ item }}
   </button>
-  }
+  } }
 </div>

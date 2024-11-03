@@ -18,7 +18,9 @@ export class AddProductComponent {
 
   ngOnInit(): void {
     this.storeService.getDataConst().subscribe((data) => {
+      // this.dataConst = data;
       this.dataConst = data;
+
       this.lengthDC = data.length - 1;
     });
     this.storeService.getCategorias().subscribe((resp) => {
@@ -115,6 +117,7 @@ export class AddProductComponent {
   }
 
   calcularPreciosProductos() {
+    console.log(this.dataConst![this.lengthDC]);
     const KwH =
       (Number(this.dataConst![this.lengthDC]?.consumoKw) / 1000 / 60) *
       Number(this.tiempo);

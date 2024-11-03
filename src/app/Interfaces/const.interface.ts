@@ -1,5 +1,5 @@
 export interface ConstData {
-  _id: string;
+  _id?: string;
   consumoKw: number;
   costImpr: number;
   vidaUtil: number;
@@ -9,5 +9,5 @@ export interface ConstData {
   riesgo: number;
   ganan: number;
   filamento: number;
-  __v: number;
+  __v?: number;
 }

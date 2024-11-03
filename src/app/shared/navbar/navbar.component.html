@@ -51,15 +51,28 @@
             [routerLink]="['']"
           />
         </div>
-        <div class="hidden sm:ml-6 sm:block">
+        <div class="hidden sm:ml-6 sm:block min-w-max">
           <div class="flex space-x-4">
-            @for (category of categories; track $index) {
-            <a
-              class="block rounded-md px-3 py-8 text-base font-medium text-green-400 hover:bg-gray-700 hover:text-white"
-              [routerLink]="['/category', getCategoryName(category.nombre)]"
-              >{{ agregarEspacios(category.nombre) }}</a
-            >
-            }
+            <div class="flex">
+              <a
+                href="#"
+                class="block rounded-md px-3 py-8 text-base font-medium text-green-400 hover:bg-gray-700 hover:text-white"
+                [routerLink]="['/category', getCategoryName('allProducts')]"
+                >Todos Los Productos</a
+              >
+
+              @for (category of categories; track $index) {
+              <a
+                class="block rounded-md px-3 py-8 text-base font-medium text-green-400 hover:bg-gray-700 hover:text-white"
+                [routerLink]="['/category', getCategoryName(category.nombre)]"
+                >{{ agregarEspacios(category.nombre) }}</a
+              >
+              }
+            </div>
+
+            <div class="flex self-center justify-end">
+              <app-search (search)="search($event)"></app-search>
+            </div>
           </div>
         </div>
       </div>
@@ -74,6 +87,13 @@
           href="#"
           class="block rounded-md px-3 py-2 text-base font-medium text-green-200 hover:bg-gray-700 hover:text-white"
           >Inicio</a
+        >
+
+        <a
+          href="#"
+          class="block rounded-md px-3 py-2 text-base font-medium text-green-200 hover:bg-gray-700 hover:text-white"
+          [routerLink]="['/category', getCategoryName('')]"
+          >Todos Los Productos</a
         >
 
         @for (category of categories; track $index) {

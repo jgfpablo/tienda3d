@@ -1,0 +1,120 @@
+<div class="w-full bg-grey-500">
+  <div class="container mx-auto py-8">
+    <div class="w-96 mx-auto bg-white rounded shadow">
+      <div
+        class="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500"
+      >
+        Add Constant Data
+      </div>
+
+      <div class="py-4 px-8">
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >consumoKw</label
+          >
+          <input
+            [(ngModel)]="constData.consumoKw"
+            type="number"
+            class="border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >costImpr</label
+          >
+          <input
+            [(ngModel)]="constData.costImpr"
+            type="number"
+            class="border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >vidaUtil</label
+          >
+
+          <input
+            [(ngModel)]="constData.vidaUtil"
+            type="number"
+            class="border rounded w-full py-2 px-3 text-grey-darker"
+          />
+
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >costokwH</label
+          >
+          <input
+            type="number"
+            [(ngModel)]="constData.costokwH"
+            class="border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >costoTiempoHombre</label
+          >
+          <input
+            type="number"
+            [(ngModel)]="constData.costoTiempoHombre"
+            class="border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >merma</label
+          >
+          <input
+            type="number"
+            [(ngModel)]="constData.merma"
+            class="border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >riesgo</label
+          >
+          <input
+            type="number"
+            [(ngModel)]="constData.riesgo"
+            class="border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >ganan</label
+          >
+          <input
+            type="number"
+            [(ngModel)]="constData.ganan"
+            class="border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >filamento</label
+          >
+          <input
+            type="number"
+            [(ngModel)]="constData.filamento"
+            class="border rounded w-full py-2 px-3 text-grey-darker"
+          />
+        </div>
+
+        <div class="mb-4">
+          <button
+            (click)="addConstData()"
+            class="mb-2 mx-16 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

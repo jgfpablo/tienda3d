@@ -7,9 +7,13 @@ import { ComponentsModule } from '../components/components.module';
 import { AddProductComponent } from './add-product/add-product.component';
 import { FormsModule } from '@angular/forms';
 import { HomePageComponent } from './home-page/home-page.component';
+import { AddConstantDataComponent } from './add-constant-data/add-constant-data.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
+import { AddCategoryComponent } from './add-category/add-category.component';
 
 @NgModule({
-  declarations: [ListProductsComponent, ProductComponent, AddProductComponent, HomePageComponent],
+  declarations: [ListProductsComponent, ProductComponent, AddProductComponent, HomePageComponent, AddConstantDataComponent, RegisterComponent, LoginComponent, AddCategoryComponent],
   imports: [
     CommonModule,
     RouterModule,

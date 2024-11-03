@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { Category } from '../../Interfaces/category.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -8,19 +9,22 @@ import { Category } from '../../Interfaces/category.interface';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  constructor(private storeService: StoreService) {}
+  constructor(private storeService: StoreService, private router: Router) {}
 
   categories: Category[] = [];
   open = false;
   ngOnInit(): void {
     this.storeService.getCategorias().subscribe((resp) => {
       this.categories = resp;
-      console.log(this.categories);
     });
   }
 
   toggleMenu() {
     this.open = !this.open;
+  }
+
+  search(search: string) {
+    this.router.navigate(['/search', search]);
   }
 
   getCategoryName(name: string) {
