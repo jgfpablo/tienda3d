@@ -7,20 +7,11 @@
   //   max-height: 588px;
 }
 
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    minmax(300px, 1fr)
-  ); /* Ajusta automáticamente las columnas */
-  gap: 1rem; /* Espacio entre las tarjetas */
-}
-
-.card {
-  padding: 1.5rem;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+.item {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  text-align: center;
+  border: 1px solid #ddd;
 }
 
 .whitespace-normal {

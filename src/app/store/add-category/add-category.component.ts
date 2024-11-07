@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-add-category',
@@ -16,7 +17,14 @@ export class AddCategoryComponent {
     imagenes: this.imagenes,
   };
 
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private storeService: StoreService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.authService.getTokenTimeLeft();
+  }
 
   guardarImagen(input: HTMLInputElement) {
     if (input.files && input.files.length > 0) {

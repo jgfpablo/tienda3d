@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ConstData } from '../../Interfaces/const.interface';
 import { StoreService } from '../../services/store.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-add-constant-data',
@@ -8,7 +9,14 @@ import { StoreService } from '../../services/store.service';
   styleUrl: './add-constant-data.component.scss',
 })
 export class AddConstantDataComponent {
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private storeService: StoreService,
+    private authService: AuthService
+  ) {}
+
+  ngOnInit(): void {
+    this.authService.getTokenTimeLeft();
+  }
 
   constData: ConstData = {
     consumoKw: 360,

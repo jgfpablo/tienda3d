@@ -42,18 +42,19 @@ export class ListProductsComponent implements OnInit {
           { length: this.totalPages },
           (_, index) => index + 1
         );
+        console.log(this.paginate);
       });
     } else if (this.search) {
       this.storeService
         .getSearch(this.search, this.paginate)
         .subscribe((data) => {
-          console.log(data.data);
           this.productsList = data.data;
           this.totalPages = Math.ceil(data.total / 6);
           this.paginacion = Array.from(
             { length: this.totalPages },
             (_, index) => index + 1
           );
+          console.log(this.paginate);
         });
     } else {
       this.storeService
@@ -65,6 +66,7 @@ export class ListProductsComponent implements OnInit {
             { length: this.totalPages },
             (_, index) => index + 1
           );
+          console.log(this.paginate);
         });
     }
   }

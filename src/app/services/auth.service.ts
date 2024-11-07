@@ -5,6 +5,8 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, tap, throwError } from 'rxjs';
+import { Token } from '../Interfaces/token.interface';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +14,7 @@ import { catchError, Observable, tap, throwError } from 'rxjs';
 export class AuthService {
   apiUrl = 'https://storeapi-production-1f58.up.railway.app/apiStore/user/';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   login({
     username,
@@ -20,11 +22,11 @@ export class AuthService {
   }: {
     username: string;
     password: string;
-  }): Observable<any> {
+  }): Observable<Token> {
     return this.httpClient
-      .post(`${this.apiUrl}/login`, { username, password })
+      .post<Token>(`${this.apiUrl}/login`, { username, password })
       .pipe(
-        tap((response: any) => {
+        tap((response: Token) => {
           localStorage.setItem('token', response.token);
         })
       );
@@ -38,12 +40,6 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  // register(userAndPassword: any) {
-  //   return this.httpClient
-  //     .post(`${this.apiUrl}register`, userAndPassword)
-  //     .pipe(tap(console.log), catchError(this.handleError));
-  // }
-
   register(userAndPassword: any) {
     const token = localStorage.getItem('token'); // O el método que uses para obtener el token
     const headers = new HttpHeaders({
@@ -53,6 +49,18 @@ export class AuthService {
     return this.httpClient
       .post(`${this.apiUrl}register`, userAndPassword, { headers }) // Pasamos los encabezados aquí
       .pipe(tap(console.log), catchError(this.handleError));
+  }
+
+  getTokenTimeLeft() {
+    const token = localStorage.getItem('token') || '';
+    const payloadBase64 = token.split('.')[1];
+    const payload = JSON.parse(atob(payloadBase64));
+    const expirationDate = payload.exp * 1000;
+    const expirate = expirationDate - Date.now();
+    if (expirate <= 0) {
+      this.logout();
+      this.router.navigate(['/login']);
+    }
   }
 
   private handleError(error: HttpErrorResponse) {

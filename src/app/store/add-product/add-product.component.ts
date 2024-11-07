@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { ConstData } from '../../Interfaces/const.interface';
 import { Category } from '../../Interfaces/category.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-add-product',
@@ -9,7 +10,10 @@ import { Category } from '../../Interfaces/category.interface';
   styleUrl: './add-product.component.scss',
 })
 export class AddProductComponent {
-  constructor(private storeService: StoreService) {}
+  constructor(
+    private storeService: StoreService,
+    private authService: AuthService
+  ) {}
 
   categorias: Category[] = [];
 
@@ -17,6 +21,7 @@ export class AddProductComponent {
   lengthDC: number = 0;
 
   ngOnInit(): void {
+    this.authService.getTokenTimeLeft();
     this.storeService.getDataConst().subscribe((data) => {
       // this.dataConst = data;
       this.dataConst = data;

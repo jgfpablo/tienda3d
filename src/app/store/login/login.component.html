@@ -6,3 +6,12 @@
 
   <button class="text-yellow-50" (click)="login()">Enviar</button>
 </form>
+
+<app-alert
+  [AlertStatus]="AlertStatus"
+  [buttonText]="buttonText"
+  [mensaje]="mensaje"
+  [typeAlert]="typeAlert"
+  [url]="url"
+  (cleanForm)="cleanFormUser()"
+></app-alert>
