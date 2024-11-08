@@ -16,3 +16,16 @@ export interface ProductsPaginate {
   total: number;
   data: Products[];
 }
+
+export interface FormProduct {
+  categoria: string;
+  colores: string[];
+  descripcion: string;
+  horas: string;
+  imagenes: string[]; // Si las imágenes son Base64, puede usarse 'string[]', si son objetos, cámbialo al tipo adecuado
+  minutos: string;
+  nombre: string;
+  oferta: string; // Considera un booleano si solo puede ser "si" o "no"
+  peso: string;
+  precio: number;
+}

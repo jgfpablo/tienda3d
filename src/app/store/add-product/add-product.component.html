@@ -133,4 +133,7 @@
   </div>
 </div> -->
 
-<app-form-product></app-form-product>
+<app-form-product
+  [categorias]="categorias"
+  (data)="getData($event)"
+></app-form-product>

@@ -13,7 +13,7 @@
             >Nombre</label
           >
           <input
-            [(ngModel)]="product.nombre"
+            [(ngModel)]="dataForm.nombre"
             class="border rounded w-full py-2 px-3 text-grey-darker"
           />
         </div>
@@ -23,7 +23,7 @@
             >Peso</label
           >
           <input
-            [(ngModel)]="peso"
+            [(ngModel)]="dataForm.peso"
             class="border rounded w-full py-2 px-3 text-grey-darker"
           />
         </div>
@@ -36,7 +36,7 @@
             >Horas</label
           >
           <input
-            [(ngModel)]="horas"
+            [(ngModel)]="dataForm.horas"
             class="border rounded w-full py-2 px-3 text-grey-darker"
           />
 
@@ -44,7 +44,7 @@
             >Minutos</label
           >
           <input
-            [(ngModel)]="minutos"
+            [(ngModel)]="dataForm.minutos"
             class="border rounded w-full py-2 px-3 text-grey-darker"
           />
         </div>
@@ -54,7 +54,7 @@
             >descripcion</label
           >
           <input
-            [(ngModel)]="product.descripcion"
+            [(ngModel)]="dataForm.descripcion"
             class="border rounded w-full py-2 px-3 text-grey-darker"
           />
         </div>
@@ -122,7 +122,7 @@
 
         <div class="mb-4">
           <button
-            (click)="emitData()"
+            (click)="sendDataForm()"
             class="mb-2 mx-16 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500"
           >
             Guardar

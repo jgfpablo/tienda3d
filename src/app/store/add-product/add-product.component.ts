@@ -16,16 +16,13 @@ export class AddProductComponent {
   ) {}
 
   categorias: Category[] = [];
-
   dataConst: ConstData[] | undefined;
   lengthDC: number = 0;
 
   ngOnInit(): void {
     this.authService.getTokenTimeLeft();
     this.storeService.getDataConst().subscribe((data) => {
-      // this.dataConst = data;
       this.dataConst = data;
-
       this.lengthDC = data.length - 1;
     });
     this.storeService.getCategorias().subscribe((resp) => {
@@ -33,43 +30,43 @@ export class AddProductComponent {
     });
   }
 
-  categoria = 'Llaveros';
-  color: string = '';
-  colores: string[] = [];
+  // categoria = 'Llaveros';
+  // color: string = '';
+  // colores: string[] = [];
   horas: number = 0;
   minutos: number = 0;
-  image: any = undefined;
-  imageBase64: string = '';
-  imagenes: string[] = [];
+  // image: any = undefined;
+  // imageBase64: string = '';
+  // imagenes: string[] = [];
 
   product = {
     nombre: '',
     descripcion: '',
-    colores: this.colores,
+    colores: [],
     oferta: 'si',
     precio: 5,
     categoria: '',
-    imagenes: this.imagenes,
+    imagenes: [],
   };
 
   tiempo: number = 0;
   peso: number = 0;
 
-  quitarColor(num: number) {
-    this.colores.splice(num, 1);
-  }
+  // quitarColor(num: number) {
+  //   this.colores.splice(num, 1);
+  // }
 
-  agregarColor() {
-    this.colores.push(this.color);
-    this.color = '';
-  }
+  // agregarColor() {
+  //   this.colores.push(this.color);
+  //   this.color = '';
+  // }
 
-  eliminarImagen(num: number) {
-    this.imagenes.splice(num, 1);
-  }
+  // eliminarImagen(num: number) {
+  //   this.imagenes.splice(num, 1);
+  // }
 
   addProduct() {
-    this.product.categoria = this.categoria;
+    // this.product.categoria = this.categoria;
     this.calcularTiempo();
     this.calcularPreciosProductos();
     this.storeService.addProduct(this.product).subscribe(
@@ -82,44 +79,44 @@ export class AddProductComponent {
     );
   }
 
-  guardarImagen(input: HTMLInputElement) {
-    this.calcularTiempo();
-    this.calcularPreciosProductos();
-    if (input.files && input.files.length > 0) {
-      const file = input.files[0];
-      this.image = file;
-    }
+  // this.calcularTiempo();
+  //     this.calcularPreciosProductos();
+  // guardarImagen(input: HTMLInputElement) {
+  //   if (input.files && input.files.length > 0) {
+  //     const file = input.files[0];
+  //     this.image = file;
+  //   }
 
-    if (!this.image) {
-      return;
-    }
+  //   if (!this.image) {
+  //     return;
+  //   }
 
-    const reader = new FileReader();
+  //   const reader = new FileReader();
 
-    reader.onload = (e: any) => {
-      const img = new Image();
-      img.src = e.target.result;
+  //   reader.onload = (e: any) => {
+  //     const img = new Image();
+  //     img.src = e.target.result;
 
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
+  //     img.onload = () => {
+  //       const canvas = document.createElement('canvas');
+  //       canvas.width = img.width;
+  //       canvas.height = img.height;
 
-        const ctx = canvas.getContext('2d');
+  //       const ctx = canvas.getContext('2d');
 
-        if (ctx) {
-          ctx.drawImage(img, 0, 0);
+  //       if (ctx) {
+  //         ctx.drawImage(img, 0, 0);
 
-          const webpImage = canvas.toDataURL('image/webp', 0.8);
-          this.imageBase64 = webpImage;
+  //         const webpImage = canvas.toDataURL('image/webp', 0.8);
+  //         this.imageBase64 = webpImage;
 
-          this.imagenes.push(this.imageBase64);
-          this.imageBase64 = '';
-        }
-      };
-    };
-    reader.readAsDataURL(this.image); // Leer la imagen como URL
-  }
+  //         this.imagenes.push(this.imageBase64);
+  //         this.imageBase64 = '';
+  //       }
+  //     };
+  //   };
+  //   reader.readAsDataURL(this.image); // Leer la imagen como URL
+  // }
 
   calcularPreciosProductos() {
     console.log(this.dataConst![this.lengthDC]);
@@ -127,8 +124,6 @@ export class AddProductComponent {
       (Number(this.dataConst![this.lengthDC]?.consumoKw) / 1000 / 60) *
       Number(this.tiempo);
 
-    console.log(this.tiempo);
-    console.log(KwH + 'kwh -----------');
     const costoEnergia = KwH * this.dataConst![this.lengthDC]?.costokwH!;
 
     const costoFilamento =
@@ -150,7 +145,6 @@ export class AddProductComponent {
     const gastos = costoEnergia + costoFilamento + depreciacion + merma;
 
     let total = gastos + ganancia;
-    console.log(total);
 
     if (total < 200) {
       this.product.precio = 200;
@@ -166,5 +160,9 @@ export class AddProductComponent {
 
   calcularTiempo() {
     this.tiempo = Number(this.horas) * 60 + Number(this.minutos);
+  }
+
+  getData(dataForm: any) {
+    console.log(dataForm);
   }
 }
