@@ -1,11 +1,4 @@
-<form action="">
-  <label for="">User</label>
-  <input [(ngModel)]="userAndPassword.username" name="user" type="text" />
-  <label for="">Password</label>
-  <input [(ngModel)]="userAndPassword.password" name="password" type="text" />
-
-  <button class="text-yellow-50" (click)="registrar()">Enviar</button>
-</form>
+<app-user-form (emitData)="getDataUser($event)"></app-user-form>
 
 <app-alert
   [AlertStatus]="AlertStatus"

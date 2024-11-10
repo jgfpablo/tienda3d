@@ -40,14 +40,18 @@ export class LoginComponent {
         this.buttonText = 'Dirigirme a inicio';
       },
       (error) => {
-        // console.error('Error al registrar:', error);
         this.AlertStatus = true;
         this.typeAlert = 'error';
-        this.mensaje = 'ha ocurrido un error al intentar realizar el login';
+        this.mensaje = error;
         this.url = '/login';
         this.buttonText = 'Reintentar';
       }
     );
+  }
+
+  getDataUser(userData: any) {
+    this.userAndPassword = userData;
+    this.login();
   }
 
   cleanFormUser() {

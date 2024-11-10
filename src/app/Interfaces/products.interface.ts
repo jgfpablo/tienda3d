@@ -19,13 +19,13 @@ export interface ProductsPaginate {
 
 export interface FormProduct {
   categoria: string;
-  colores: string[];
+  // colores: string[];
   descripcion: string;
-  horas: string;
+  horas: number;
   imagenes: string[]; // Si las imágenes son Base64, puede usarse 'string[]', si son objetos, cámbialo al tipo adecuado
-  minutos: string;
+  minutos: number;
   nombre: string;
   oferta: string; // Considera un booleano si solo puede ser "si" o "no"
-  peso: string;
-  precio: number;
+  peso: number;
+  // precio: number;
 }

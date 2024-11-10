@@ -9,6 +9,7 @@ import { SuccessAlertComponent } from './success-alert/success-alert.component';
 import { FormCategoryComponent } from './form-category/form-category.component';
 import { FormProductComponent } from './form-product/form-product.component';
 import { AlertComponent } from './alert/alert.component';
+import { UserFormComponent } from './user-form/user-form.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { AlertComponent } from './alert/alert.component';
     FormCategoryComponent,
     FormProductComponent,
     AlertComponent,
+    UserFormComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule],
   exports: [
@@ -28,6 +30,8 @@ import { AlertComponent } from './alert/alert.component';
     ErrorAlertComponent,
     AlertComponent,
     FormProductComponent,
+    FormCategoryComponent,
+    UserFormComponent,
   ],
 })
 export class ComponentsModule {}

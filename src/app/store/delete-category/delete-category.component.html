@@ -1,0 +1,48 @@
+<div class="w-full bg-grey-500">
+  <div class="container mx-auto py-8">
+    <div class="w-96 mx-auto bg-white rounded shadow">
+      <div
+        class="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500"
+      >
+        Delete Category
+      </div>
+
+      <div class="py-4 px-8">
+        <div class="py-4 px-8">
+          <div class="mb-4">
+            <label class="block text-grey-darker text-sm font-bold mb-2"
+              >Categoria</label
+            >
+            <!-- [(ngModel)]="categoria" -->
+            <select [(ngModel)]="categoria">
+              <option value="seleccione una categoria">
+                Seleccione una categoria
+              </option>
+              <option *ngFor="let cat of categorias || []" [value]="cat.nombre">
+                {{ cat.nombre }}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <button
+              (click)="DeleteCategory()"
+              class="mb-2 mx-16 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500"
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-alert
+  [AlertStatus]="AlertStatus"
+  [buttonText]="buttonText"
+  [mensaje]="mensaje"
+  [typeAlert]="typeAlert"
+  [url]="url"
+  (cleanForm)="cleanFormUser()"
+></app-alert>

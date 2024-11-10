@@ -12,8 +12,8 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  apiUrl = 'https://storeapi-production-1f58.up.railway.app/apiStore/user/';
-
+  apiUrl = 'https://storeapi-production-1f58.up.railway.app/apiStore/users';
+  // /
   constructor(private httpClient: HttpClient, private router: Router) {}
 
   login({
@@ -28,7 +28,8 @@ export class AuthService {
       .pipe(
         tap((response: Token) => {
           localStorage.setItem('token', response.token);
-        })
+        }),
+        catchError(this.handleError)
       );
   }
 
@@ -41,41 +42,54 @@ export class AuthService {
   }
 
   register(userAndPassword: any) {
-    const token = localStorage.getItem('token'); // O el método que uses para obtener el token
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Añadimos el token en el encabezado
+      Authorization: `Bearer ${token}`,
     });
 
     return this.httpClient
-      .post(`${this.apiUrl}register`, userAndPassword, { headers }) // Pasamos los encabezados aquí
-      .pipe(tap(console.log), catchError(this.handleError));
+      .post(`${this.apiUrl}/register`, userAndPassword, { headers })
+      .pipe(catchError(this.handleError));
   }
 
   getTokenTimeLeft() {
+    // const token = localStorage.getItem('token') || '';
+    // const payloadBase64 = token.split('.')[1];
+    // const payload = JSON.parse(atob(payloadBase64));
+    // const expirationDate = payload.exp * 1000;
+    // const expirate = expirationDate - Date.now();
+    // if (expirate <= 0) {
+    //   this.logout();
+    //   this.router.navigate(['/login']);
+    // }
+
     const token = localStorage.getItem('token') || '';
+
+    if (token.split('.').length !== 3) {
+      this.logout();
+      this.router.navigate(['/login']);
+      return;
+    }
+
     const payloadBase64 = token.split('.')[1];
-    const payload = JSON.parse(atob(payloadBase64));
-    const expirationDate = payload.exp * 1000;
-    const expirate = expirationDate - Date.now();
-    if (expirate <= 0) {
+    try {
+      const payload = JSON.parse(atob(payloadBase64));
+      const expirationDate = payload.exp * 1000;
+      const expirate = expirationDate - Date.now();
+
+      if (expirate <= 0) {
+        this.logout();
+        this.router.navigate(['/login']);
+      }
+    } catch (error) {
       this.logout();
       this.router.navigate(['/login']);
     }
   }
 
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Ocurrió un error desconocido.';
+    let errorMessage = error.error;
 
-    if (error.error instanceof ErrorEvent) {
-      // Errores del lado del cliente
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // Errores del lado del servidor
-      errorMessage = `Código de error: ${error.status}, Mensaje: ${error.message}`;
-    }
-
-    // Podrías enviar el error a un servicio de logging aquí
-    console.error(errorMessage);
-    return throwError(errorMessage); // Re-lanzar el error para que lo maneje el suscriptor
+    return throwError(errorMessage.error);
   }
 }

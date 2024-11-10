@@ -27,7 +27,7 @@ export class RegisterComponent {
     password: '',
   };
 
-  registrar() {
+  register() {
     this.authService.register(this.userAndPassword).subscribe(
       (resp) => {
         this.AlertStatus = true;
@@ -39,16 +39,20 @@ export class RegisterComponent {
       (error) => {
         this.AlertStatus = true;
         this.typeAlert = 'error';
-        this.mensaje =
-          'ha ocurrido un error al intentar crear un nuevo Usuario';
+        this.mensaje = error;
         this.url = '/register';
         this.buttonText = 'Reintentar';
       }
     );
   }
 
+  getDataUser(userData: any) {
+    this.userAndPassword = userData;
+    this.register();
+  }
   cleanFormUser() {
     this.userAndPassword.password = '';
     this.userAndPassword.username = '';
+    this.AlertStatus = false;
   }
 }

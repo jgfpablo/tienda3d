@@ -3,6 +3,7 @@ import { StoreService } from '../../services/store.service';
 import { ConstData } from '../../Interfaces/const.interface';
 import { Category } from '../../Interfaces/category.interface';
 import { AuthService } from '../../services/auth.service';
+import { FormProduct, Products } from '../../Interfaces/products.interface';
 
 @Component({
   selector: 'app-add-product',
@@ -14,6 +15,13 @@ export class AddProductComponent {
     private storeService: StoreService,
     private authService: AuthService
   ) {}
+
+  AlertStatus: boolean = false;
+  typeAlert: string = '';
+  mensaje: string = '';
+  urlRedirect: string = '';
+  buttonText: string = '';
+  url: string = '';
 
   categorias: Category[] = [];
   dataConst: ConstData[] | undefined;
@@ -30,20 +38,14 @@ export class AddProductComponent {
     });
   }
 
-  // categoria = 'Llaveros';
-  // color: string = '';
-  // colores: string[] = [];
   horas: number = 0;
   minutos: number = 0;
-  // image: any = undefined;
-  // imageBase64: string = '';
-  // imagenes: string[] = [];
 
-  product = {
+  product: Products = {
     nombre: '',
     descripcion: '',
     colores: [],
-    oferta: 'si',
+    // oferta: 'si',
     precio: 5,
     categoria: '',
     imagenes: [],
@@ -52,74 +54,40 @@ export class AddProductComponent {
   tiempo: number = 0;
   peso: number = 0;
 
-  // quitarColor(num: number) {
-  //   this.colores.splice(num, 1);
-  // }
-
-  // agregarColor() {
-  //   this.colores.push(this.color);
-  //   this.color = '';
-  // }
-
-  // eliminarImagen(num: number) {
-  //   this.imagenes.splice(num, 1);
-  // }
-
   addProduct() {
-    // this.product.categoria = this.categoria;
-    this.calcularTiempo();
-    this.calcularPreciosProductos();
-    this.storeService.addProduct(this.product).subscribe(
-      (response) => {
-        console.log('Producto agregado:', response);
-      },
-      (error) => {
-        console.error('Error al agregar el producto:', error);
-      }
-    );
+    if (
+      Object.values(this.product).every(
+        (value) => value !== null && value !== ''
+      )
+    ) {
+      this.storeService.addProduct(this.product).subscribe(
+        () => {
+          this.AlertStatus = true;
+          this.typeAlert = 'success';
+          this.mensaje = 'La creacion del nuevo producto fue exitosa';
+          this.url = '/';
+          this.buttonText = 'Dirigirme a inicio';
+        },
+        (error) => {
+          console.log(error);
+          this.AlertStatus = true;
+          this.typeAlert = 'error';
+          this.mensaje = error;
+          this.url = '/addProductCosas';
+          this.buttonText = 'Reintentar';
+        }
+      );
+    } else {
+      this.AlertStatus = true;
+      this.typeAlert = 'error';
+      this.mensaje =
+        'Rellene todos los campos para registrar un nuevo producto';
+      this.url = '/addProductCosas';
+      this.buttonText = 'Reintentar';
+    }
   }
 
-  // this.calcularTiempo();
-  //     this.calcularPreciosProductos();
-  // guardarImagen(input: HTMLInputElement) {
-  //   if (input.files && input.files.length > 0) {
-  //     const file = input.files[0];
-  //     this.image = file;
-  //   }
-
-  //   if (!this.image) {
-  //     return;
-  //   }
-
-  //   const reader = new FileReader();
-
-  //   reader.onload = (e: any) => {
-  //     const img = new Image();
-  //     img.src = e.target.result;
-
-  //     img.onload = () => {
-  //       const canvas = document.createElement('canvas');
-  //       canvas.width = img.width;
-  //       canvas.height = img.height;
-
-  //       const ctx = canvas.getContext('2d');
-
-  //       if (ctx) {
-  //         ctx.drawImage(img, 0, 0);
-
-  //         const webpImage = canvas.toDataURL('image/webp', 0.8);
-  //         this.imageBase64 = webpImage;
-
-  //         this.imagenes.push(this.imageBase64);
-  //         this.imageBase64 = '';
-  //       }
-  //     };
-  //   };
-  //   reader.readAsDataURL(this.image); // Leer la imagen como URL
-  // }
-
   calcularPreciosProductos() {
-    console.log(this.dataConst![this.lengthDC]);
     const KwH =
       (Number(this.dataConst![this.lengthDC]?.consumoKw) / 1000 / 60) *
       Number(this.tiempo);
@@ -147,9 +115,9 @@ export class AddProductComponent {
     let total = gastos + ganancia;
 
     if (total < 200) {
-      this.product.precio = 200;
+      return (this.product.precio = 200);
     } else {
-      this.product.precio = this.redondear(total);
+      return (this.product.precio = this.redondear(total));
     }
   }
 
@@ -162,7 +130,21 @@ export class AddProductComponent {
     this.tiempo = Number(this.horas) * 60 + Number(this.minutos);
   }
 
-  getData(dataForm: any) {
-    console.log(dataForm);
+  getData(dataForm: FormProduct) {
+    this.horas = dataForm.horas;
+    this.minutos = dataForm.minutos;
+    this.peso = dataForm.peso;
+    this.calcularTiempo();
+    this.product.nombre = dataForm.nombre;
+    this.product.imagenes = dataForm.imagenes;
+    this.product.precio = this.calcularPreciosProductos();
+    this.product.descripcion = dataForm.descripcion;
+    this.product.categoria = dataForm.categoria;
+    this.addProduct();
+  }
+
+  cleanFormUser() {
+    // this.userAndPassword.password = ''; resetear datos si quiero limpiar
+    this.AlertStatus = false;
   }
 }

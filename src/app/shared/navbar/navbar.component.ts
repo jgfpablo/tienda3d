@@ -15,6 +15,10 @@ export class NavbarComponent {
   categories: Category[] = [];
   open = false;
   ngOnInit(): void {
+    this.storeService.getCategoriaEliminadaObservable().subscribe(() => {
+      this.cargarCategorias();
+    });
+
     this.storeService.getCategorias().subscribe((resp) => {
       this.categories = resp;
     });
@@ -35,5 +39,11 @@ export class NavbarComponent {
 
   agregarEspacios(name: string): string {
     return name.replace(/([A-Z])/g, ' $1').trim();
+  }
+
+  cargarCategorias() {
+    this.storeService.getCategorias().subscribe((resp) => {
+      this.categories = resp;
+    });
   }
 }

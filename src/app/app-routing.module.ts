@@ -9,6 +9,7 @@ import { RegisterComponent } from './store/register/register.component';
 import { LoginComponent } from './store/login/login.component';
 import { authGuard } from './guard/auth.guard';
 import { AddCategoryComponent } from './store/add-category/add-category.component';
+import { DeleteCategoryComponent } from './store/delete-category/delete-category.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,8 @@ const routes: Routes = [
   },
 
   { path: 'login', component: LoginComponent },
+
+  { path: 'DeleteCategories', component: DeleteCategoryComponent },
 ];
 
 @NgModule({

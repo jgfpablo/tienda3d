@@ -18,6 +18,13 @@ export class AddConstantDataComponent {
     this.authService.getTokenTimeLeft();
   }
 
+  AlertStatus: boolean = false;
+  typeAlert: string = '';
+  mensaje: string = '';
+  urlRedirect: string = '';
+  buttonText: string = '';
+  url: string = '';
+
   constData: ConstData = {
     consumoKw: 360,
     costImpr: 500000,
@@ -31,14 +38,26 @@ export class AddConstantDataComponent {
   };
 
   addConstData() {
-    console.log(this.constData);
     this.storeService.addConstData(this.constData).subscribe(
       (response) => {
-        console.log('nueva data constante agregada', response);
+        this.AlertStatus = true;
+        this.typeAlert = 'success';
+        this.mensaje = 'Nuevos datos constantes agregados';
+        this.url = '/';
+        this.buttonText = 'Dirigirme a inicio';
       },
       (error) => {
-        console.error('fallo la carga de la data constante:', error);
+        this.AlertStatus = true;
+        this.typeAlert = 'error';
+        this.mensaje =
+          'Rellene todos los campos para realizar un nuevo registro';
+        this.url = '/addCategory';
+        this.buttonText = 'Reintentar';
       }
     );
+  }
+
+  cleanForm() {
+    this.AlertStatus = false;
   }
 }

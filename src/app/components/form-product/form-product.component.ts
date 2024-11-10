@@ -1,4 +1,10 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 import { Category } from '../../Interfaces/category.interface';
 
@@ -10,12 +16,12 @@ import { Category } from '../../Interfaces/category.interface';
 export class FormProductComponent {
   @Output() data = new EventEmitter();
   @Input() categorias: Category[] = [];
+  categoria = 'Llaveros';
 
   image: any = undefined;
   imageBase64: string = '';
   imagenes: string[] = [];
 
-  categoria = 'Llaveros';
   color: string = '';
   colores: string[] = [];
   horas: number = 0;
@@ -25,10 +31,7 @@ export class FormProductComponent {
   dataForm = {
     nombre: '',
     descripcion: '',
-    colores: this.colores,
-    oferta: '',
-    precio: 5,
-    categoria: '',
+    categoria: this.categoria,
     imagenes: this.imagenes,
     horas: 0,
     minutos: 0,
@@ -90,6 +93,7 @@ export class FormProductComponent {
   }
 
   sendDataForm() {
+    this.dataForm.categoria = this.categoria;
     this.data.emit(this.dataForm);
   }
 }

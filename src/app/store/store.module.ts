@@ -12,8 +12,20 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 
+import { DeleteCategoryComponent } from './delete-category/delete-category.component';
+
 @NgModule({
-  declarations: [ListProductsComponent, ProductComponent, AddProductComponent, HomePageComponent, AddConstantDataComponent, RegisterComponent, LoginComponent, AddCategoryComponent],
+  declarations: [
+    ListProductsComponent,
+    ProductComponent,
+    AddProductComponent,
+    HomePageComponent,
+    AddConstantDataComponent,
+    RegisterComponent,
+    LoginComponent,
+    AddCategoryComponent,
+    DeleteCategoryComponent,
+  ],
   imports: [
     CommonModule,
     RouterModule,

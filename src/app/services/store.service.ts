@@ -4,7 +4,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, tap, throwError } from 'rxjs';
+import { catchError, Observable, Subject, tap, throwError } from 'rxjs';
 import { Category } from '../Interfaces/category.interface';
 import { ConstData } from '../Interfaces/const.interface';
 import { Products, ProductsPaginate } from '../Interfaces/products.interface';
@@ -116,19 +116,34 @@ export class StoreService {
     return resultado;
   }
 
+  deleteCategory(category: string) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.httpClient
+      .post(
+        `${this.apiUrl}categories/delete`,
+        { nombre: category },
+        { headers }
+      )
+      .pipe(
+        tap(() => this.categoriaEliminada.next()),
+        catchError(this.handleError)
+      );
+  }
+
+  private categoriaEliminada = new Subject<void>();
+
+  getCategoriaEliminadaObservable(): Observable<void> {
+    return this.categoriaEliminada.asObservable();
+  }
+
   private handleError(error: HttpErrorResponse) {
-    let errorMessage = 'Ocurrió un error desconocido.';
+    let errorMessage = error.error;
+    console.log(error);
 
-    if (error.error instanceof ErrorEvent) {
-      // Errores del lado del cliente
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      // Errores del lado del servidor
-      errorMessage = `Código de error: ${error.status}, Mensaje: ${error.message}`;
-    }
-
-    // Podrías enviar el error a un servicio de logging aquí
-    console.error(errorMessage);
-    return throwError(errorMessage); // Re-lanzar el error para que lo maneje el suscriptor
+    return throwError(errorMessage.error);
   }
 }
