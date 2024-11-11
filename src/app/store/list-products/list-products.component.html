@@ -4,6 +4,8 @@
     *ngFor="let product of productsList"
     [product]="product"
     (textTruncated)="onChangeTruncated($event)"
+    [deleteButton]="deleteButton"
+    (eventDelet)="deletProduct($event)"
   ></app-card-products>
 </div>
 
@@ -18,3 +20,12 @@
   </button>
   } }
 </div>
+
+<app-alert
+  [AlertStatus]="AlertStatus"
+  [buttonText]="buttonText"
+  [mensaje]="mensaje"
+  [typeAlert]="typeAlert"
+  [url]="url"
+></app-alert>
+<!-- (cleanForm)="cleanFormUser()" -->

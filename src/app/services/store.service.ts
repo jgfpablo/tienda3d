@@ -140,6 +140,17 @@ export class StoreService {
     return this.categoriaEliminada.asObservable();
   }
 
+  deletProduct(product: string) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.httpClient
+      .post(`${this.apiUrl}products/delete`, { nombre: product }, { headers })
+      .pipe(tap(console.log), catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = error.error;
     console.log(error);

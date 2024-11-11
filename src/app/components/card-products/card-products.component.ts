@@ -11,11 +11,12 @@ import { Products } from '../../Interfaces/products.interface';
 export class CardProductsComponent {
   @Input() product: Products | null = null;
   @Input() dataConst: ConstData | undefined;
-  // @Input() productPrices: any;
+  @Input() deleteButton: boolean = false;
+  @Output() eventDelet = new EventEmitter();
 
   @Output() textTruncated = new EventEmitter<boolean>();
 
-  description = false;
+  description: boolean = false;
 
   toogleDescription(value: boolean) {
     this.description = value;
@@ -32,5 +33,9 @@ export class CardProductsComponent {
     }
 
     return texto.slice(0, limite) + '...'; // Corta el texto y añade "..."
+  }
+
+  sendData() {
+    this.eventDelet.emit(this.product?.nombre);
   }
 }

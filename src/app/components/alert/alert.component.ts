@@ -6,8 +6,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './alert.component.scss',
 })
 export class AlertComponent {
-  @Input() AlertStatus: boolean = false; //es activo si se muestra el alert
-  @Input() typeAlert: string = ''; // es el tipo de alert  a desencadenar
+  @Input() AlertStatus: boolean = false;
+  @Input() typeAlert: string = '';
   @Input() mensaje: string = '';
   @Input() buttonText: string = '';
   @Input() url: string = '';

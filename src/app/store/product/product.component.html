@@ -1,65 +1,67 @@
 <div
   class="w-full h-full flex justify-center items-center bg-slate-200 bg-image"
 >
-  <div
-    class="w-5/6 colr shadow-2xl rounded-lg overflow-hidden p-6 border border-green-400"
-  >
-    <div class="flex">
-      <div class="visualizer">
-        @if(product && product.imagenes){ @for (item of product.imagenes; track
-        $index) {
-        <img
-          (click)="showImgPhoto($index)"
-          [src]="item"
-          class="object-cover border shadow-md hover:shadow-2xl cursor-pointer"
-          width="70"
-          alt="card-image"
-          loading="lazy"
-        />
-        } }
-      </div>
+  <div class="w-11/12 shadow-2xl rounded-lg overflow-hidden p-6 glass flex">
+    <div class="flex w-full">
+      <div class="w-8/12">
+        <div class="flex">
+          @if(product && product.imagenes && product.imagenes.length > 0){
 
-      <div class="w-4/6 flex items-center justify-center">
-        @if(product && product.imagenes && product.imagenes.length > 0){
-        <div class="flex justify-center relative">
-          <button class="btn-left" (click)="showImg('-')">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="text-slate-500 w-5"
-              viewBox="0 0 448 512"
-            >
-              <path
-                d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+          <div class="flex w-4/12 justify-center">
+            <div class="inline-flex flex-wrap content-start gap-0">
+              @if(product && product.imagenes){ @for (item of product.imagenes;
+              track $index) {
+              <img
+                (click)="showImgPhoto($index)"
+                [src]="item"
+                class="object-cover border cursor-pointer bg img-visualizacion w-16 h-16"
+                alt="card-image"
+                loading="lazy"
               />
-            </svg>
-          </button>
+              } }
+            </div>
+          </div>
 
-          <img
-            [src]="product.imagenes[numberPhoto]"
-            class="object-cover"
-            width="500"
-            height="300"
-            alt="card-image"
-            loading="lazy"
-          />
+          <div class="flex justify-center w-8/12">
+            <!-- <button class="btn-left" (click)="showImg('-')">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="text-slate-500 w-5"
+                viewBox="0 0 448 512"
+              >
+                <path
+                  d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"
+                />
+              </svg>
+            </button> -->
 
-          <button class="btn-right" (click)="showImg('+')">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 448 512"
-              class="text-slate-500 w-5"
-            >
-              <path
-                d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+            <div class="flex justify-center items-center">
+              <img
+                [src]="product.imagenes[numberPhoto]"
+                class="object-cover bg w-96 h-96 m-auto"
+                alt="card-image"
+                loading="lazy"
               />
-            </svg>
-          </button>
+            </div>
+
+            <!-- <button class="btn-right" (click)="showImg('+')">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+                class="text-slate-500 w-5"
+              >
+                <path
+                  d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"
+                />
+              </svg>
+            </button> -->
+          </div>
+          }
         </div>
-        }
       </div>
 
-      <div class="w-2/6 flex justify-center items-center">
-        <div class="border border-green-400 w-11/12 rounded-md">
+      <div class="w-6/12 flex justify-center items-center bg">
+        <div class="w-11/12 rounded-md">
           <h1 class="text-2xl p-4 text-center font-bold text-green-400">
             {{ product?.nombre }}
           </h1>

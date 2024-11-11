@@ -3,6 +3,7 @@ import { StoreService } from '../../services/store.service';
 
 import { ActivatedRoute } from '@angular/router';
 import { Products } from '../../Interfaces/products.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-list-products',
@@ -14,15 +15,22 @@ export class ListProductsComponent implements OnInit {
   description = false;
   category: string = '';
   search: string = '';
-
   paginate = 0;
-
   totalPages = 0;
   paginacion: number[] = [];
+  deleteButton: boolean = false;
+
+  AlertStatus: boolean = false;
+  typeAlert: string = '';
+  mensaje: string = '';
+  urlRedirect: string = '';
+  buttonText: string = '';
+  url: string = '';
 
   constructor(
     private storeService: StoreService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +40,8 @@ export class ListProductsComponent implements OnInit {
       this.search = params['search'];
       this.loadProducts();
     });
+
+    this.deleteButton = this.authService.isAuthenticated();
   }
   loadProducts(): void {
     if (this.category == 'allProducts') {
@@ -77,5 +87,16 @@ export class ListProductsComponent implements OnInit {
   }
   onChangeTruncated(truncated: boolean) {
     this.description = truncated;
+  }
+
+  deletProduct(product: string) {
+    this.storeService.deletProduct(product).subscribe((resp) => {
+      console.log('eliminado');
+      this.AlertStatus = true;
+      this.typeAlert = 'success';
+      this.mensaje = `Se elimino el producto ${product}`;
+      this.url = '/';
+      this.buttonText = 'Dirigirme a inicio';
+    });
   }
 }

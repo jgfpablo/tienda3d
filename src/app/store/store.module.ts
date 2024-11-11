@@ -11,7 +11,6 @@ import { AddConstantDataComponent } from './add-constant-data/add-constant-data.
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
-
 import { DeleteCategoryComponent } from './delete-category/delete-category.component';
 
 @NgModule({

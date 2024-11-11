@@ -38,14 +38,30 @@ span {
   padding: 5px 10px;
 }
 
-.h92 {
-  height: 92%;
-}
-
 .bg-image {
   background-image: url("../../../assets/img/hero-bg.png");
 }
 
-.colr {
-  background-color: rgb(14, 14, 14);
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: whitesmoke;
+}
+
+img {
+  // filter: drop-shadow(-5px 5px 23px #0008ff);
+}
+
+.bg {
+  background-color: black;
+  border-radius: 5%;
+  margin: 20px;
+}
+
+.img-visualizacion {
+  aspect-ratio: 1 / 1; /* o simplemente 1 */
 }

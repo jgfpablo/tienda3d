@@ -4,7 +4,9 @@
   [ngClass]="{ 'mb-10 ': description == true }"
 >
   <div class="shadow-md bg-clip-border rounded-xl glass">
-    <div class="overflow-hidden bg-clip-border rounded-xl bg mx-auto bg-img">
+    <div
+      class="overflow-hidden bg-clip-border rounded-xl bg img-card object-fill"
+    >
       @if(product && product.imagenes && product.imagenes.length > 0){
       <img
         [src]="product.imagenes[0]"
@@ -55,3 +57,6 @@
     </div>
   </div>
 </div>
+@if (deleteButton == true) {
+<button class="text-white" (click)="sendData()">Eliminar</button>
+}

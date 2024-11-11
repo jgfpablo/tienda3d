@@ -22,6 +22,7 @@ const routes: Routes = [
     component: ListProductsComponent,
   },
   { path: 'product/:name', component: ProductComponent },
+
   { path: 'search/:search', component: ListProductsComponent },
 
   { path: 'category/:category', component: ListProductsComponent },

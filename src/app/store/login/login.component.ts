@@ -32,7 +32,6 @@ export class LoginComponent {
   login() {
     this.authService.login(this.userAndPassword).subscribe(
       (resp: Token) => {
-        console.log('me logue');
         this.AlertStatus = true;
         this.typeAlert = 'success';
         this.mensaje = 'Su ingreso fue exitoso';
