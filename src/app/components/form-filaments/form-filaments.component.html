@@ -1,0 +1,68 @@
+<div class="w-full bg-grey-500">
+  <div class="container mx-auto py-8">
+    <div class="w-96 mx-auto bg-white rounded shadow">
+      <div
+        class="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500"
+      >
+        Add Category
+      </div>
+
+      <div class="py-4 px-8">
+        <div class="py-4 px-8">
+          <div class="mb-4">
+            <label class="block text-grey-darker text-sm font-bold mb-2"
+              >Nombre</label
+            >
+            <input
+              [(ngModel)]="filament.color"
+              name="color"
+              class="border rounded w-full py-2 px-3 text-grey-darker"
+            />
+          </div>
+
+          <!-- <div class="mb-4">
+            <label class="block text-grey-darker text-sm font-bold mb-2"
+              >Marca</label
+            >
+            <input
+              [(ngModel)]="filament.marca"
+              name="marca"
+              class="border rounded w-full py-2 px-3 text-grey-darker"
+            />
+          </div> -->
+
+          <div class="mb-4">
+            <label class="block text-grey-darker text-sm font-bold mb-2"
+              >Imagen</label
+            >
+            <input
+              #InputImage
+              name="image"
+              type="file"
+              accept="image/png, image/jpeg"
+            />
+
+            <button (click)="guardarImagen(InputImage)">Aplicar</button>
+
+            <div *ngFor="let item of imagenes; let i = index">
+              <img
+                (click)="eliminarImagen(i)"
+                [src]="item"
+                alt="Imagen convertida a WebP"
+              />
+            </div>
+          </div>
+
+          <div class="mb-4">
+            <button
+              (click)="sendData()"
+              class="mb-2 mx-16 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500"
+            >
+              Guardar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

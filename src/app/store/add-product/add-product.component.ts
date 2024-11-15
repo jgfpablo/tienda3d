@@ -4,6 +4,7 @@ import { ConstData } from '../../Interfaces/const.interface';
 import { Category } from '../../Interfaces/category.interface';
 import { AuthService } from '../../services/auth.service';
 import { FormProduct, Products } from '../../Interfaces/products.interface';
+import { Filament } from '../../Interfaces/filament.interface';
 
 @Component({
   selector: 'app-add-product',
@@ -24,6 +25,7 @@ export class AddProductComponent {
   url: string = '';
 
   categorias: Category[] = [];
+  colores: Filament[] = [];
   dataConst: ConstData[] | undefined;
   lengthDC: number = 0;
 
@@ -36,23 +38,32 @@ export class AddProductComponent {
     this.storeService.getCategorias().subscribe((resp) => {
       this.categorias = resp;
     });
+
+    this.storeService.getFilaments().subscribe((resp) => {
+      this.colores = resp;
+    });
   }
 
-  horas: number = 0;
-  minutos: number = 0;
+  // horas: number = 0;
+  // minutos: number = 0;
+  // tiempo: number = 0;
+  // peso: number = 0;
 
   product: Products = {
     nombre: '',
     descripcion: '',
     colores: [],
-    // oferta: 'si',
-    precio: 5,
+    precio: 0,
     categoria: '',
     imagenes: [],
+    peso: 0,
+    horas: 0,
+    minutos: 0,
+    alto: '',
+    ancho: '',
+    grosor: '',
+    material: '',
   };
-
-  tiempo: number = 0;
-  peso: number = 0;
 
   addProduct() {
     if (
@@ -65,15 +76,15 @@ export class AddProductComponent {
           this.AlertStatus = true;
           this.typeAlert = 'success';
           this.mensaje = 'La creacion del nuevo producto fue exitosa';
-          this.url = '/';
-          this.buttonText = 'Dirigirme a inicio';
+          this.url = '/addProduct';
+          this.buttonText = 'Continuar Agregando productos';
         },
         (error) => {
           console.log(error);
           this.AlertStatus = true;
           this.typeAlert = 'error';
           this.mensaje = error;
-          this.url = '/addProductCosas';
+          this.url = '/addProduct';
           this.buttonText = 'Reintentar';
         }
       );
@@ -82,65 +93,78 @@ export class AddProductComponent {
       this.typeAlert = 'error';
       this.mensaje =
         'Rellene todos los campos para registrar un nuevo producto';
-      this.url = '/addProductCosas';
+      this.url = '/addProduct';
       this.buttonText = 'Reintentar';
     }
   }
 
-  calcularPreciosProductos() {
-    const KwH =
-      (Number(this.dataConst![this.lengthDC]?.consumoKw) / 1000 / 60) *
-      Number(this.tiempo);
+  // DELEGAR A API
+  // calcularPreciosProductos() {
+  //   const KwH =
+  //     (Number(this.dataConst![this.lengthDC]?.consumoKw) / 1000 / 60) *
+  //     Number(this.tiempo);
 
-    const costoEnergia = KwH * this.dataConst![this.lengthDC]?.costokwH!;
+  //   const costoEnergia = KwH * this.dataConst![this.lengthDC]?.costokwH!;
 
-    const costoFilamento =
-      (Number(this.peso) * Number(this.dataConst![this.lengthDC]?.filamento)) /
-      1000;
-    const depreciacion =
-      (Number(this.dataConst![this.lengthDC]?.costImpr) /
-        Number(this.dataConst![this.lengthDC]?.vidaUtil) /
-        60) *
-      Number(this.tiempo);
-    const merma =
-      (Number(this.peso) *
-        (Number(this.dataConst![this.lengthDC]?.merma) / 100) *
-        Number(this.dataConst![this.lengthDC]?.filamento)) /
-      1000;
-    const ganancia =
-      (costoEnergia + costoFilamento + depreciacion + merma) *
-      (this.dataConst![this.lengthDC]?.ganan! / 100);
-    const gastos = costoEnergia + costoFilamento + depreciacion + merma;
+  //   const costoFilamento =
+  //     (Number(this.peso) * Number(this.dataConst![this.lengthDC]?.filamento)) /
+  //     1000;
+  //   const depreciacion =
+  //     (Number(this.dataConst![this.lengthDC]?.costImpr) /
+  //       Number(this.dataConst![this.lengthDC]?.vidaUtil) /
+  //       60) *
+  //     Number(this.tiempo);
+  //   const merma =
+  //     (Number(this.peso) *
+  //       (Number(this.dataConst![this.lengthDC]?.merma) / 100) *
+  //       Number(this.dataConst![this.lengthDC]?.filamento)) /
+  //     1000;
+  //   const ganancia =
+  //     (costoEnergia + costoFilamento + depreciacion + merma) *
+  //     (this.dataConst![this.lengthDC]?.ganan! / 100);
+  //   const gastos = costoEnergia + costoFilamento + depreciacion + merma;
 
-    let total = gastos + ganancia;
+  //   let total = gastos + ganancia;
 
-    if (total < 200) {
-      return (this.product.precio = 200);
-    } else {
-      return (this.product.precio = this.redondear(total));
-    }
-  }
+  //   if (total < 200) {
+  //     return (this.product.precio = 200);
+  //   } else {
+  //     return (this.product.precio = this.redondear(total));
+  //   }
+  // }
 
-  redondear(numero: number): number {
-    const redondeo50 = Math.ceil(numero / 50) * 50;
-    return redondeo50 % 100 === 0 ? redondeo50 : redondeo50;
-  }
+  // DELEGAR A API
 
-  calcularTiempo() {
-    this.tiempo = Number(this.horas) * 60 + Number(this.minutos);
-  }
+  // redondear(numero: number): number {
+  //   const redondeo50 = Math.ceil(numero / 50) * 50;
+  //   return redondeo50 % 100 === 0 ? redondeo50 : redondeo50;
+  // }
 
-  getData(dataForm: FormProduct) {
-    this.horas = dataForm.horas;
-    this.minutos = dataForm.minutos;
-    this.peso = dataForm.peso;
-    this.calcularTiempo();
+  // DELEGAR A API
+  // calcularTiempo() {
+  //   this.tiempo = Number(this.horas) * 60 + Number(this.minutos);
+  // }
+
+  getData(dataForm: Products) {
     this.product.nombre = dataForm.nombre;
-    this.product.imagenes = dataForm.imagenes;
-    this.product.precio = this.calcularPreciosProductos();
     this.product.descripcion = dataForm.descripcion;
+    this.product.colores = dataForm.colores;
+    this.product.precio = dataForm.precio;
     this.product.categoria = dataForm.categoria;
+    this.product.imagenes = dataForm.imagenes;
+    this.product.peso = dataForm.peso;
+    this.product.horas = dataForm.horas;
+    this.product.minutos = dataForm.minutos;
+    this.product.alto = dataForm.alto;
+    this.product.ancho = dataForm.ancho;
+    this.product.grosor = dataForm.grosor;
+    this.product.material = dataForm.material;
+
     this.addProduct();
+
+    //DELEGAR A LA API
+    // this.calcularTiempo();
+    // this.product.precio = this.calcularPreciosProductos();
   }
 
   cleanFormUser() {

@@ -58,6 +58,7 @@ export class ListProductsComponent implements OnInit {
       this.storeService
         .getSearch(this.search, this.paginate)
         .subscribe((data) => {
+          console.log(data);
           this.productsList = data.data;
           this.totalPages = Math.ceil(data.total / 6);
           this.paginacion = Array.from(
@@ -90,13 +91,12 @@ export class ListProductsComponent implements OnInit {
   }
 
   deletProduct(product: string) {
-    this.storeService.deletProduct(product).subscribe((resp) => {
-      console.log('eliminado');
+    this.storeService.deletProduct(product).subscribe(() => {
       this.AlertStatus = true;
       this.typeAlert = 'success';
       this.mensaje = `Se elimino el producto ${product}`;
-      this.url = '/';
-      this.buttonText = 'Dirigirme a inicio';
+      this.url = '/category/allProducts';
+      this.buttonText = 'ir a allProducts';
     });
   }
 }

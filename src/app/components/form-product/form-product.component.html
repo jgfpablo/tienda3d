@@ -47,12 +47,24 @@
             [(ngModel)]="dataForm.minutos"
             class="border rounded w-full py-2 px-3 text-grey-darker"
           />
+
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >Precio Fijo
+            <p class="text-gray-400 text-sm">
+              si lo dejas en 0 se calculara por peso
+            </p></label
+          >
+          <input
+            [(ngModel)]="dataForm.precio"
+            class="border rounded w-full py-2 px-3 text-grey-darker"
+          />
         </div>
 
         <div class="mb-4">
           <label class="block text-grey-darker text-sm font-bold mb-2"
             >descripcion</label
           >
+          <!-- HACER QUE ESTE INPUT SEA TIPO ( NO RECUERDO - MAS GRANDE) -->
           <input
             [(ngModel)]="dataForm.descripcion"
             class="border rounded w-full py-2 px-3 text-grey-darker"
@@ -61,10 +73,83 @@
 
         <div class="mb-4">
           <label class="block text-grey-darker text-sm font-bold mb-2"
-            >colores</label
+            >Altura</label
+          >
+          <div class="flex">
+            <input
+              [(ngModel)]="dataForm.alto"
+              class="border rounded w-3/4 py-2 px-3 text-grey-darker"
+            />
+
+            <select
+              class="border rounded py-2 px-3 text-grey-darker"
+              [(ngModel)]="medidaAlto"
+            >
+              <option selected>mm</option>
+              <option>cm</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >ancho</label
+          >
+          <div class="flex">
+            <input
+              [(ngModel)]="dataForm.ancho"
+              class="border rounded py-2 px-3 text-grey-darker w-3/4"
+            />
+            <div class="flex">
+              <select
+                class="border rounded py-2 px-3 text-grey-darker"
+                [(ngModel)]="medidaAncho"
+              >
+                <option selected>mm</option>
+                <option>cm</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >grosor</label
+          >
+          <div class="flex">
+            <input
+              [(ngModel)]="dataForm.grosor"
+              class="border rounded py-2 px-3 text-grey-darker w-3/4"
+            />
+            <select
+              class="border rounded py-2 px-3 text-grey-darker"
+              [(ngModel)]="medidaGrosor"
+            >
+              <option selected>mm</option>
+              <option>cm</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >Material</label
           >
 
-          <div class="flex justify-start">
+          <select
+            class="border rounded py-2 px-3 text-grey-darker w-full"
+            [(ngModel)]="dataForm.material"
+          >
+            <option selected>Plastico</option>
+          </select>
+        </div>
+
+        <div class="mb-4">
+          <label class="block text-grey-darker text-sm font-bold mb-2"
+            >Colores</label
+          >
+
+          <div class="mb-4">
             <button
               (click)="agregarColor()"
               class="text-green-500 bg-transparent border border-solid border-green-500 hover:bg-green-500 hover:text-white active:bg-green-600 font-bold uppercase text-xs px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -72,14 +157,16 @@
             >
               +
             </button>
-            <input
-              [(ngModel)]="color"
-              class="border rounded w-full py-2 px-3 text-grey-darker"
-            />
+            <select [(ngModel)]="color">
+              <option>seleccione un color</option>
+              <option *ngFor="let cat of colores">
+                {{ cat.color }}
+              </option>
+            </select>
           </div>
 
           <div>
-            @for (item of colores; track $index) {
+            @for (item of coloresDisponibles; track $index) {
             <button class="ml-2" (click)="quitarColor($index)">
               {{ item }}
             </button>

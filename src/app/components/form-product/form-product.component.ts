@@ -1,6 +1,14 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  SimpleChanges,
+} from '@angular/core';
 
 import { Category } from '../../Interfaces/category.interface';
+import { Filament } from '../../Interfaces/filament.interface';
+import { Products } from '../../Interfaces/products.interface';
 
 @Component({
   selector: 'app-form-product',
@@ -10,19 +18,49 @@ import { Category } from '../../Interfaces/category.interface';
 export class FormProductComponent {
   @Output() data = new EventEmitter();
   @Input() categorias: Category[] = [];
+  @Input() colores: Filament[] = [];
+  @Input() product: Products = {
+    nombre: '',
+    descripcion: '',
+    colores: [],
+    precio: 0,
+    categoria: '',
+    imagenes: [],
+    peso: 0,
+    horas: 0,
+    minutos: 0,
+    alto: '',
+    ancho: '',
+    grosor: '',
+    material: '',
+  };
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.product);
+    //separar el tamano (ancho alto grosor) por el espacio separandolo en los tipos de medida
+    if (this.product.nombre != '') {
+      this.dataForm = this.product;
+    }
+    this.dataForm.alto = String(this.dataForm.alto).replace(/ .*/, '');
+    this.dataForm.ancho = String(this.dataForm.ancho).replace(/ .*/, '');
+    this.dataForm.grosor = String(this.dataForm.grosor).replace(/ .*/, '');
+
+    console.log(this.dataForm);
+  }
+
   categoria = 'Llaveros';
 
   image: any = undefined;
   imageBase64: string = '';
   imagenes: string[] = [];
 
-  color: string = '';
-  colores: string[] = [];
-  horas: number = 0;
-  minutos: number = 0;
-  peso: number = 0;
+  color: string = 'seleccione un color';
+  coloresDisponibles: string[] = [];
+  medidaAlto: string = 'mm';
+  medidaAncho: string = 'mm';
+  medidaGrosor: string = 'mm';
 
-  dataForm = {
+  dataForm: Products = {
     nombre: '',
     descripcion: '',
     categoria: this.categoria,
@@ -30,6 +68,12 @@ export class FormProductComponent {
     horas: 0,
     minutos: 0,
     peso: 0,
+    precio: 0,
+    colores: this.coloresDisponibles,
+    alto: '',
+    ancho: '',
+    grosor: '',
+    material: 'Plastico',
   };
 
   emitData() {
@@ -74,12 +118,17 @@ export class FormProductComponent {
   }
 
   quitarColor(num: number) {
-    this.colores.splice(num, 1);
+    this.coloresDisponibles.splice(num, 1);
   }
 
   agregarColor() {
-    this.colores.push(this.color);
-    this.color = '';
+    if (
+      this.color != 'seleccione un color' &&
+      !this.coloresDisponibles.includes(this.color)
+    ) {
+      this.coloresDisponibles.push(this.color);
+    }
+    // this.color = '';
   }
 
   eliminarImagen(num: number) {
@@ -87,6 +136,9 @@ export class FormProductComponent {
   }
 
   sendDataForm() {
+    this.dataForm.alto = this.dataForm.alto + ' ' + this.medidaAlto;
+    this.dataForm.ancho = this.dataForm.ancho + ' ' + this.medidaAncho;
+    this.dataForm.grosor = this.dataForm.grosor + ' ' + this.medidaGrosor;
     this.dataForm.categoria = this.categoria;
     this.data.emit(this.dataForm);
   }

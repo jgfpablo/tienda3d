@@ -12,6 +12,9 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { AddCategoryComponent } from './add-category/add-category.component';
 import { DeleteCategoryComponent } from './delete-category/delete-category.component';
+import { AddFilamentComponent } from './add-filament/add-filament.component';
+import { DeleteFilamentComponent } from './delete-filament/delete-filament.component';
+import { UpdateProductComponent } from './update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,9 @@ import { DeleteCategoryComponent } from './delete-category/delete-category.compo
     LoginComponent,
     AddCategoryComponent,
     DeleteCategoryComponent,
+    AddFilamentComponent,
+    DeleteFilamentComponent,
+    UpdateProductComponent,
   ],
   imports: [
     CommonModule,

@@ -1,0 +1,46 @@
+<div class="w-full bg-grey-500">
+  <div class="container mx-auto py-8">
+    <div class="w-96 mx-auto bg-white rounded shadow">
+      <div
+        class="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500"
+      >
+        Delete Color
+      </div>
+
+      <div class="py-4 px-8">
+        <div class="py-4 px-8">
+          <div class="mb-4">
+            <label class="block text-grey-darker text-sm font-bold mb-2"
+              >Color</label
+            >
+
+            <select [(ngModel)]="filament">
+              <option value="seleccione un color">Seleccione un color</option>
+              <option *ngFor="let fil of filaments || []" [value]="fil.color">
+                {{ fil.color }}
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-4">
+            <button
+              (click)="DeleteFilament()"
+              class="mb-2 mx-16 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500"
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-alert
+  [AlertStatus]="AlertStatus"
+  [buttonText]="buttonText"
+  [mensaje]="mensaje"
+  [typeAlert]="typeAlert"
+  [url]="url"
+  (cleanForm)="cleanFormUser()"
+></app-alert>

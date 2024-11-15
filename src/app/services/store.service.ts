@@ -8,6 +8,7 @@ import { catchError, Observable, Subject, tap, throwError } from 'rxjs';
 import { Category } from '../Interfaces/category.interface';
 import { ConstData } from '../Interfaces/const.interface';
 import { Products, ProductsPaginate } from '../Interfaces/products.interface';
+import { Filament } from '../Interfaces/filament.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -92,14 +93,14 @@ export class StoreService {
     });
 
     console.log(category.nombre);
-    category.nombre = this.formatCategory(category.nombre);
+    category.nombre = this.formatString(category.nombre);
 
     return this.httpClient
       .post(`${this.apiUrl}categories/category`, category, { headers })
       .pipe(catchError(this.handleError));
   }
 
-  formatCategory(name: string): string {
+  formatString(name: string): string {
     // Verifica si 'name' es una cadena
     if (typeof name !== 'string') {
       throw new Error('El argumento debe ser una cadena de texto.');
@@ -149,6 +150,36 @@ export class StoreService {
     return this.httpClient
       .post(`${this.apiUrl}products/delete`, { nombre: product }, { headers })
       .pipe(tap(console.log), catchError(this.handleError));
+  }
+
+  addFilament(filament: Filament) {
+    const token = localStorage.getItem('token'); // O el método que uses para obtener el token
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`, // Añadimos el token en el encabezado
+    });
+
+    filament.color = this.formatString(filament.color);
+
+    return this.httpClient
+      .post(`${this.apiUrl}filaments/filament`, filament, { headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteFilament(filament: string) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    return this.httpClient
+      .post(`${this.apiUrl}filaments/delete`, { color: filament }, { headers })
+      .pipe(catchError(this.handleError));
+  }
+
+  getFilaments(): Observable<Filament[]> {
+    return this.httpClient
+      .get<Filament[]>(`${this.apiUrl}filaments/`)
+      .pipe(catchError(this.handleError));
   }
 
   private handleError(error: HttpErrorResponse) {

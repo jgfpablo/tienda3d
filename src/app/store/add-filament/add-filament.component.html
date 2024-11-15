@@ -1,0 +1,10 @@
+<app-form-filaments (dataForm)="getDataForm($event)"></app-form-filaments>
+
+<app-alert
+  [AlertStatus]="AlertStatus"
+  [buttonText]="buttonText"
+  [mensaje]="mensaje"
+  [typeAlert]="typeAlert"
+  [url]="url"
+  (cleanForm)="cleanForm()"
+></app-alert>

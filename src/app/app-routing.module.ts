@@ -10,6 +10,9 @@ import { LoginComponent } from './store/login/login.component';
 import { authGuard } from './guard/auth.guard';
 import { AddCategoryComponent } from './store/add-category/add-category.component';
 import { DeleteCategoryComponent } from './store/delete-category/delete-category.component';
+import { AddFilamentComponent } from './store/add-filament/add-filament.component';
+import { DeleteFilamentComponent } from './store/delete-filament/delete-filament.component';
+import { UpdateProductComponent } from './store/update-product/update-product.component';
 
 const routes: Routes = [
   {
@@ -27,7 +30,7 @@ const routes: Routes = [
 
   { path: 'category/:category', component: ListProductsComponent },
   {
-    path: 'addProductCosas',
+    path: 'addProduct',
     component: AddProductComponent,
     canActivate: [authGuard],
   },
@@ -43,9 +46,29 @@ const routes: Routes = [
     canActivate: [authGuard],
   },
 
+  {
+    path: 'addFilament',
+    component: AddFilamentComponent,
+    canActivate: [authGuard],
+  },
+
   { path: 'login', component: LoginComponent },
 
-  { path: 'DeleteCategories', component: DeleteCategoryComponent },
+  {
+    path: 'DeleteCategories',
+    component: DeleteCategoryComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'DeleteFilament',
+    component: DeleteFilamentComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'UpdateProduct/:name',
+    component: UpdateProductComponent,
+    canActivate: [authGuard],
+  },
 ];
 
 @NgModule({

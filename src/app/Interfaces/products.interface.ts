@@ -6,6 +6,13 @@ export interface Products {
   precio: number;
   categoria: string;
   imagenes: string[];
+  peso: number;
+  horas: number;
+  minutos: number;
+  alto: string;
+  ancho: string;
+  grosor: string;
+  material: string;
   productId?: string;
   __v?: string;
 }

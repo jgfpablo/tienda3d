@@ -9,6 +9,8 @@ import { FormCategoryComponent } from './form-category/form-category.component';
 import { FormProductComponent } from './form-product/form-product.component';
 import { AlertComponent } from './alert/alert.component';
 import { UserFormComponent } from './user-form/user-form.component';
+import { FormFilamentsComponent } from './form-filaments/form-filaments.component';
+import { AddFilamentComponent } from '../store/add-filament/add-filament.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { UserFormComponent } from './user-form/user-form.component';
     FormProductComponent,
     AlertComponent,
     UserFormComponent,
+    FormFilamentsComponent,
   ],
   imports: [CommonModule, RouterModule, FormsModule],
   exports: [
@@ -27,6 +30,7 @@ import { UserFormComponent } from './user-form/user-form.component';
     FormProductComponent,
     FormCategoryComponent,
     UserFormComponent,
+    FormFilamentsComponent,
   ],
 })
 export class ComponentsModule {}
