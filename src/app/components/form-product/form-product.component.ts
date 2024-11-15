@@ -36,7 +36,6 @@ export class FormProductComponent {
   };
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.product);
     //separar el tamano (ancho alto grosor) por el espacio separandolo en los tipos de medida
     if (this.product.nombre != '') {
       this.dataForm = this.product;
@@ -45,7 +44,10 @@ export class FormProductComponent {
     this.dataForm.ancho = String(this.dataForm.ancho).replace(/ .*/, '');
     this.dataForm.grosor = String(this.dataForm.grosor).replace(/ .*/, '');
 
-    console.log(this.dataForm);
+    this.categoria = this.dataForm.categoria;
+    this.coloresDisponibles = this.dataForm.colores;
+    this.dataForm.material = this.product.material;
+    this.imagenes = this.product.imagenes;
   }
 
   categoria = 'Llaveros';

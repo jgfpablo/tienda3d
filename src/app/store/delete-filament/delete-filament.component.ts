@@ -27,6 +27,7 @@ export class DeleteFilamentComponent {
   url: string = '';
 
   category: Filament = {
+    disponibilidad: true,
     color: '',
     imagenes: [],
   };

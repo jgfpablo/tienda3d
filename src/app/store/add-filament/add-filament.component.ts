@@ -19,6 +19,7 @@ export class AddFilamentComponent {
   //filament
   filament: Filament = {
     // marca: '',
+    disponibilidad: true,
     color: '',
     imagenes: [],
   };

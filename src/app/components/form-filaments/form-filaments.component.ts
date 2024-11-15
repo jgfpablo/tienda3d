@@ -15,6 +15,7 @@ export class FormFilamentsComponent {
 
   filament: Filament = {
     color: '',
+    disponibilidad: true,
     // marca: '',
     imagenes: this.imagenes,
   };
