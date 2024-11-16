@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { ActivatedRoute } from '@angular/router';
 import { Products } from '../../Interfaces/products.interface';
+import { Filament } from '../../Interfaces/filament.interface';
 
 @Component({
   selector: 'app-product',
@@ -20,12 +21,18 @@ export class ProductComponent {
   photo: number = 0;
   numberPhoto: number = 0;
 
+  filamentsAvaible: Filament[] = [];
+
   ngOnInit(): void {
     this.name = this.activatedRoute.snapshot.paramMap.get('name')!;
 
     this.service.getProductByName(this.name).subscribe((resp) => {
       this.product = resp[0];
       this.photo = resp[0].imagenes?.length! - 1;
+    });
+
+    this.service.getFilaments().subscribe((resp) => {
+      this.filamentsAvaible = resp;
     });
   }
 

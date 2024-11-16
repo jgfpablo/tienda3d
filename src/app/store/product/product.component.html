@@ -74,7 +74,15 @@
             <p class="font-medium text-green-400">{{ product?.descripcion }}</p>
           </div>
 
-          @if(product && product.colores && product.colores.length > 0){
+          <div class="flex justify-center items-center m-4">
+            <p class="font-medium text-green-400">
+              Medidas : Alto: {{ product?.alto }} - Ancho:
+              {{ product?.ancho }} - Grosor:
+              {{ product?.grosor }}
+            </p>
+          </div>
+
+          @if(product && product.colores && product.colores.length > 0 ){
           <div class="flex flex-col justify-center items-center">
             <h3 class="text-green-400">Colores Disponibles</h3>
 

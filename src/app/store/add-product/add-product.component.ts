@@ -66,6 +66,7 @@ export class AddProductComponent {
   };
 
   addProduct() {
+    console.log(this.product);
     if (
       Object.values(this.product).every(
         (value) => value !== null && value !== ''
@@ -159,7 +160,7 @@ export class AddProductComponent {
     this.product.ancho = dataForm.ancho;
     this.product.grosor = dataForm.grosor;
     this.product.material = dataForm.material;
-
+    console.log(dataForm.imagenes);
     this.addProduct();
 
     //DELEGAR A LA API

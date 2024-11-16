@@ -1,0 +1,37 @@
+<div>
+  <div class="mb-4">
+    <label class="block text-grey-darker text-sm font-bold mb-2">Color</label>
+    <select
+      [(ngModel)]="selectedFilament"
+      (change)="updateCheckboxState()"
+      class="border rounded py-2 px-3 w-full"
+    >
+      <option *ngFor="let fil of filaments" [ngValue]="fil">
+        {{ fil.color }}
+      </option>
+    </select>
+  </div>
+
+  <div class="mb-4">
+    <label class="block text-grey-darker text-sm font-bold mb-2"
+      >Disponibilidad</label
+    >
+    <input
+      type="checkbox"
+      name="Disponibilidad"
+      [(ngModel)]="selectedFilament.disponibilidad"
+      (change)="onCheckboxChange()"
+      id=""
+    />
+  </div>
+  <button (click)="updateFilament()">Actualizar</button>
+</div>
+
+<app-alert
+  [AlertStatus]="AlertStatus"
+  [buttonText]="buttonText"
+  [mensaje]="mensaje"
+  [typeAlert]="typeAlert"
+  [url]="url"
+  (cleanForm)="cleanForm()"
+></app-alert>

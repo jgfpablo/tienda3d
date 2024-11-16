@@ -92,7 +92,6 @@ export class StoreService {
       Authorization: `Bearer ${token}`, // Añadimos el token en el encabezado
     });
 
-    console.log(category.nombre);
     category.nombre = this.formatString(category.nombre);
 
     return this.httpClient
@@ -160,6 +159,7 @@ export class StoreService {
 
     filament.color = this.formatString(filament.color);
 
+    console.log('filamento estado: ' + filament.disponibilidad);
     return this.httpClient
       .post(`${this.apiUrl}filaments/filament`, filament, { headers })
       .pipe(catchError(this.handleError));
@@ -194,6 +194,16 @@ export class StoreService {
         { product, name },
         { headers }
       )
+      .pipe(catchError(this.handleError));
+  }
+
+  updateFilament(filament: Filament) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.httpClient
+      .put(`${this.apiUrl}filaments/updateFilament`, { filament }, { headers })
       .pipe(catchError(this.handleError));
   }
 

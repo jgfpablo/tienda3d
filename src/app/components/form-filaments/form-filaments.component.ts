@@ -57,6 +57,10 @@ export class FormFilamentsComponent {
     reader.readAsDataURL(this.image); // Leer la imagen como URL
   }
 
+  toggleState() {
+    console.log('Nuevo estado:', this.filament.disponibilidad);
+  }
+
   eliminarImagen(num: number) {
     this.imagenes.splice(num, 1);
   }

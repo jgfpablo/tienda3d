@@ -15,6 +15,7 @@ import { DeleteCategoryComponent } from './delete-category/delete-category.compo
 import { AddFilamentComponent } from './add-filament/add-filament.component';
 import { DeleteFilamentComponent } from './delete-filament/delete-filament.component';
 import { UpdateProductComponent } from './update-product/update-product.component';
+import { UpdateFilamentComponent } from './update-filament/update-filament.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { UpdateProductComponent } from './update-product/update-product.componen
     AddFilamentComponent,
     DeleteFilamentComponent,
     UpdateProductComponent,
+    UpdateFilamentComponent,
   ],
   imports: [
     CommonModule,

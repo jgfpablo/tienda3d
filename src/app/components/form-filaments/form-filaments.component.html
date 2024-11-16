@@ -4,7 +4,7 @@
       <div
         class="mx-16 py-4 px-8 text-black text-xl font-bold border-b border-grey-500"
       >
-        Add Category
+        Add Filament
       </div>
 
       <div class="py-4 px-8">
@@ -20,6 +20,18 @@
             />
           </div>
 
+          <div class="mb-4">
+            <label class="block text-grey-darker text-sm font-bold mb-2"
+              >Disponibilidad</label
+            >
+            <input
+              type="checkbox"
+              name="Disponibilidad"
+              [(ngModel)]="filament.disponibilidad"
+              (change)="toggleState()"
+              id=""
+            />
+          </div>
           <!-- <div class="mb-4">
             <label class="block text-grey-darker text-sm font-bold mb-2"
               >Marca</label

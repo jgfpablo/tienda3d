@@ -99,4 +99,8 @@ export class ListProductsComponent implements OnInit {
       this.buttonText = 'ir a allProducts';
     });
   }
+
+  cleanForm() {
+    this.AlertStatus = false;
+  }
 }

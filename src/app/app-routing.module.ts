@@ -13,6 +13,7 @@ import { DeleteCategoryComponent } from './store/delete-category/delete-category
 import { AddFilamentComponent } from './store/add-filament/add-filament.component';
 import { DeleteFilamentComponent } from './store/delete-filament/delete-filament.component';
 import { UpdateProductComponent } from './store/update-product/update-product.component';
+import { UpdateFilamentComponent } from './store/update-filament/update-filament.component';
 
 const routes: Routes = [
   {
@@ -67,6 +68,12 @@ const routes: Routes = [
   {
     path: 'UpdateProduct/:name',
     component: UpdateProductComponent,
+    canActivate: [authGuard],
+  },
+
+  {
+    path: 'UpdateFilaments',
+    component: UpdateFilamentComponent,
     canActivate: [authGuard],
   },
 ];

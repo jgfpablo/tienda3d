@@ -39,6 +39,7 @@ export class FormProductComponent {
     //separar el tamano (ancho alto grosor) por el espacio separandolo en los tipos de medida
     if (this.product.nombre != '') {
       this.dataForm = this.product;
+      console.log(this.product);
     }
     this.dataForm.alto = String(this.dataForm.alto).replace(/ .*/, '');
     this.dataForm.ancho = String(this.dataForm.ancho).replace(/ .*/, '');
@@ -47,7 +48,9 @@ export class FormProductComponent {
     this.categoria = this.dataForm.categoria;
     this.coloresDisponibles = this.dataForm.colores;
     this.dataForm.material = this.product.material;
-    this.imagenes = this.product.imagenes;
+    if (this.product) {
+      this.imagenes = this.product.imagenes;
+    }
   }
 
   categoria = 'Llaveros';
@@ -78,9 +81,9 @@ export class FormProductComponent {
     material: 'Plastico',
   };
 
-  emitData() {
-    this.data.emit();
-  }
+  // emitData() {
+  //   this.data.emit();
+  // }
 
   guardarImagen(input: HTMLInputElement) {
     if (input.files && input.files.length > 0) {
@@ -117,6 +120,7 @@ export class FormProductComponent {
       };
     };
     reader.readAsDataURL(this.image); // Leer la imagen como URL
+    console.log(this.imagenes);
   }
 
   quitarColor(num: number) {
@@ -142,6 +146,7 @@ export class FormProductComponent {
     this.dataForm.ancho = this.dataForm.ancho + ' ' + this.medidaAncho;
     this.dataForm.grosor = this.dataForm.grosor + ' ' + this.medidaGrosor;
     this.dataForm.categoria = this.categoria;
+    this.dataForm.imagenes = this.imagenes;
     this.data.emit(this.dataForm);
   }
 }
