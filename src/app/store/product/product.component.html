@@ -79,7 +79,8 @@
               Medidas : Alto: {{ product?.alto }} - Ancho:
               {{ product?.ancho }}
 
-              @if(product?.grosor !='0 mm'){ - Grosor: {{ product?.grosor }}
+              @if(product?.grosor !='0 mm' && product?.grosor !=' mm'){ -
+              Grosor: {{ product?.grosor }}
               }
             </p>
           </div>
