@@ -44,6 +44,8 @@ export class UpdateFilamentComponent {
   ) {}
 
   ngOnInit(): void {
+    this.authService.getTokenTimeLeft();
+
     this.storeService.getFilaments().subscribe((resp) => {
       this.filaments = resp;
     });

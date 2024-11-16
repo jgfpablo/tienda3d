@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, SimpleChanges } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { ActivatedRoute } from '@angular/router';
 import { Products } from '../../Interfaces/products.interface';
@@ -22,6 +22,10 @@ export class ProductComponent {
   numberPhoto: number = 0;
 
   filamentsAvaible: Filament[] = [];
+  productLoaded = false;
+  filamentsLoaded = false;
+
+  filamentosDisponibles: string[] = [];
 
   ngOnInit(): void {
     this.name = this.activatedRoute.snapshot.paramMap.get('name')!;
@@ -29,11 +33,43 @@ export class ProductComponent {
     this.service.getProductByName(this.name).subscribe((resp) => {
       this.product = resp[0];
       this.photo = resp[0].imagenes?.length! - 1;
+
+      this.productLoaded = true;
+
+      if (this.productLoaded && this.filamentsLoaded) {
+        this.verDisponibles();
+      }
     });
 
     this.service.getFilaments().subscribe((resp) => {
       this.filamentsAvaible = resp;
+      this.filamentsLoaded = true;
+
+      if (this.productLoaded && this.filamentsLoaded) {
+        this.verDisponibles();
+      }
     });
+  }
+
+  verDisponibles() {
+    if (
+      this.product &&
+      this.product.colores &&
+      this.filamentsAvaible.length > 0
+    ) {
+      for (let color of this.product.colores) {
+        // Iterar sobre los colores del producto
+        for (let filament of this.filamentsAvaible) {
+          // Iterar sobre los filamentos disponibles
+          if (filament.color === color && filament.disponibilidad) {
+            // Si el color coincide y el filamento está disponible, se agrega a la lista
+            this.filamentosDisponibles.push(color);
+          }
+        }
+      }
+
+      console.log('Filamentos disponibles:', this.filamentosDisponibles);
+    }
   }
 
   showImg(data: string) {
