@@ -32,6 +32,7 @@ export class ProductComponent {
 
     this.service.getProductByName(this.name).subscribe((resp) => {
       this.product = resp[0];
+      console.log(this.product.grosor);
       this.photo = resp[0].imagenes?.length! - 1;
 
       this.productLoaded = true;
