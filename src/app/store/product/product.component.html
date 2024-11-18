@@ -103,13 +103,13 @@
   class="w-full h-full flex justify-center items-center bg-slate-200 bg-image"
 >
   <div
-    class="w-11/12 shadow-2xl rounded-lg overflow-hidden p-6 glass flex flex-col md:flex-row"
+    class="w-11/12 shadow-2xl rounded-lg overflow-hidden p-2 md:p-6 glass flex flex-col md:flex-row"
   >
     <div class="flex flex-col md:w-5/12">
       <div class="flex flex-wrap md:flex-nowrap">
         @if(product && product.imagenes && product.imagenes.length > 0){
         <div class="flex flex-row w-full md:w-2/12 justify-center">
-          <div class="flex md:inline-flex md:flex-wrap content-start">
+          <div class="flex flex-wrap md:inline-flex md:flex-wrap content-start">
             @if(product && product.imagenes && product.imagenes.length > 0){
             @for (item of product.imagenes; track $index) {
             <img
@@ -123,8 +123,8 @@
           </div>
         </div>
 
-        <div class="flex justify-center w-9/12 md:w-full m-5">
-          <div class="flex justify-center items-center">
+        <div class="flex justify-center md:w-full md:m-5">
+          <div class="flex justify-center items-center w-full">
             <img
               [src]="product.imagenes[numberPhoto]"
               class="object-cover bg w-96 h-96 md:w-full md:h-auto m-auto"
@@ -138,9 +138,9 @@
     </div>
 
     <div
-      class="w-full md:w-6/12 flex justify-center items-center bg mt-4 md:mt-0"
+      class="w-full md:w-6/12 flex self-center justify-center items-center bg mt-4"
     >
-      <div class="w-11/12 rounded-md">
+      <div class="w-11/12 rounded-md mx-auto">
         <h1 class="text-2xl p-4 text-center font-bold text-green-400">
           {{ product?.nombre }}
         </h1>
