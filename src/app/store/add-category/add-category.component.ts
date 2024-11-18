@@ -18,6 +18,7 @@ export class AddCategoryComponent {
 
   category: Category = {
     nombre: '',
+    adicional: 0,
     imagenes: [],
   };
 
@@ -41,7 +42,7 @@ export class AddCategoryComponent {
         () => {
           this.AlertStatus = true;
           this.typeAlert = 'success';
-          this.mensaje = 'La creacion del nuevo producto fue exitosa';
+          this.mensaje = 'La creacion de la nueva categoria fue exitosa';
           this.url = '/';
           this.buttonText = 'Dirigirme a inicio';
         },

@@ -18,10 +18,10 @@ span {
 }
 
 .btn-left {
-  position: absolute; /* Posicionamos el botón de manera absoluta */
-  top: 50%; /* Alinea el botón verticalmente en el centro */
-  left: 10px; /* Posiciona el botón a la izquierda con un margen */
-  transform: translateY(-50%); /* Ajusta el botón para centrarlo */
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
   padding: 5px 10px;
 }
 
@@ -31,10 +31,10 @@ span {
 }
 
 .btn-right {
-  position: absolute; /* Posicionamos el botón de manera absoluta */
-  top: 50%; /* Alinea el botón verticalmente en el centro */
-  right: 10px; /* Posiciona el botón a la derecha con un margen */
-  transform: translateY(-50%); /* Ajusta el botón para centrarlo */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
   padding: 5px 10px;
 }
 
@@ -44,7 +44,6 @@ span {
 
 .glass {
   background: rgba(255, 255, 255, 0.1);
-  // box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
   border-radius: 10px;
@@ -52,16 +51,16 @@ span {
   color: whitesmoke;
 }
 
-img {
-  // filter: drop-shadow(-5px 5px 23px #0008ff);
-}
-
 .bg {
   background-color: black;
   border-radius: 5%;
   margin: 20px;
+
+  padding: 20px;
 }
 
-.img-visualizacion {
-  aspect-ratio: 1 / 1; /* o simplemente 1 */
+.bg-mini-img {
+  background-color: black;
+  border-radius: 5%;
+  margin: 10px;
 }

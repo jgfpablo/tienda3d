@@ -207,6 +207,16 @@ export class StoreService {
       .pipe(catchError(this.handleError));
   }
 
+  updateCategory(category: Category) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.httpClient
+      .put(`${this.apiUrl}categories/updateCategory`, { category }, { headers })
+      .pipe(catchError(this.handleError));
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = error.error;
     console.log(error);

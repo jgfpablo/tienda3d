@@ -13,6 +13,7 @@ export interface Products {
   ancho: string;
   grosor: string;
   material: string;
+  multiplicador: number;
   productId?: string;
   __v?: string;
 }

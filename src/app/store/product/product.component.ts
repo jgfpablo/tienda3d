@@ -65,6 +65,7 @@ export class ProductComponent {
           if (filament.color === color && filament.disponibilidad) {
             // Si el color coincide y el filamento está disponible, se agrega a la lista
             this.filamentosDisponibles.push(color);
+            console.log(this.filamentosDisponibles);
           }
         }
       }

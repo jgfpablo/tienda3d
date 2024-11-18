@@ -11,13 +11,16 @@
         <div class="py-4 px-8">
           <div class="mb-4">
             <label class="block text-grey-darker text-sm font-bold mb-2"
-              >Nombre</label
+              >Color</label
             >
-            <input
-              [(ngModel)]="category.nombre"
-              name="nombre"
-              class="border rounded w-full py-2 px-3 text-grey-darker"
-            />
+            <select
+              [(ngModel)]="category"
+              class="border rounded py-2 px-3 w-full"
+            >
+              <option *ngFor="let cat of categories" [ngValue]="cat">
+                {{ cat.nombre }}
+              </option>
+            </select>
           </div>
 
           <div class="mb-4">
@@ -44,7 +47,7 @@
 
             <button (click)="guardarImagen(InputImage)">Aplicar</button>
 
-            <div *ngFor="let item of imagenes; let i = index">
+            <div *ngFor="let item of category.imagenes; let i = index">
               <img
                 (click)="eliminarImagen(i)"
                 [src]="item"
@@ -55,10 +58,10 @@
 
           <div class="mb-4">
             <button
-              (click)="sendData()"
+              (click)="updateCategory()"
               class="mb-2 mx-16 rounded-full py-1 px-24 bg-gradient-to-r from-green-400 to-blue-500"
             >
-              Guardar
+              Modificar Categoria
             </button>
           </div>
         </div>
@@ -66,3 +69,12 @@
     </div>
   </div>
 </div>
+
+<app-alert
+  [AlertStatus]="AlertStatus"
+  [buttonText]="buttonText"
+  [mensaje]="mensaje"
+  [typeAlert]="typeAlert"
+  [url]="url"
+  (cleanForm)="cleanForm()"
+></app-alert>

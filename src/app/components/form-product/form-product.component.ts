@@ -33,6 +33,7 @@ export class FormProductComponent {
     ancho: '',
     grosor: '',
     material: '',
+    multiplicador: 1,
   };
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -79,6 +80,7 @@ export class FormProductComponent {
     ancho: '',
     grosor: '',
     material: 'Plastico',
+    multiplicador: 1,
   };
 
   // emitData() {

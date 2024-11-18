@@ -63,6 +63,7 @@ export class AddProductComponent {
     ancho: '',
     grosor: '',
     material: '',
+    multiplicador: 1,
   };
 
   addProduct() {
@@ -160,6 +161,7 @@ export class AddProductComponent {
     this.product.ancho = dataForm.ancho;
     this.product.grosor = dataForm.grosor;
     this.product.material = dataForm.material;
+    this.product.multiplicador = dataForm.multiplicador;
     console.log(dataForm.imagenes);
     this.addProduct();
 

@@ -14,6 +14,7 @@ import { AddFilamentComponent } from './store/add-filament/add-filament.componen
 import { DeleteFilamentComponent } from './store/delete-filament/delete-filament.component';
 import { UpdateProductComponent } from './store/update-product/update-product.component';
 import { UpdateFilamentComponent } from './store/update-filament/update-filament.component';
+import { UpdateCategoryComponent } from './store/update-category/update-category.component';
 
 const routes: Routes = [
   {
@@ -74,6 +75,11 @@ const routes: Routes = [
   {
     path: 'UpdateFilaments',
     component: UpdateFilamentComponent,
+    canActivate: [authGuard],
+  },
+  {
+    path: 'UpdateCategories',
+    component: UpdateCategoryComponent,
     canActivate: [authGuard],
   },
 ];

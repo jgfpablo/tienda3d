@@ -41,6 +41,7 @@ export class UpdateProductComponent {
     ancho: '',
     grosor: '',
     material: '',
+    multiplicador: 1,
   };
 
   colores: Filament[] = [];

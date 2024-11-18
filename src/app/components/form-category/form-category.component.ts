@@ -15,6 +15,7 @@ export class FormCategoryComponent {
 
   category: Category = {
     nombre: '',
+    adicional: 0,
     imagenes: this.imagenes,
   };
 

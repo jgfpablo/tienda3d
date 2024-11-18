@@ -28,6 +28,7 @@ export class DeleteCategoryComponent {
 
   category: Category = {
     nombre: '',
+    adicional: 0,
     imagenes: [],
   };
 
