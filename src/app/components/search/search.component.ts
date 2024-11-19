@@ -13,4 +13,10 @@ export class SearchComponent {
     this.search.emit(this.data);
     this.data = '';
   }
+
+  onKeyPress(event: KeyboardEvent): void {
+    if (event.key === 'Enter') {
+      this.buscar();
+    }
+  }
 }

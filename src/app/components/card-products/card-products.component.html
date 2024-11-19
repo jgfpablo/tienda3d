@@ -1,8 +1,6 @@
-<div
-  class="glass"
-  [routerLink]="['/product', product?.nombre]"
-  [ngClass]="{ 'mb-10 ': description == true }"
->
+<div class="glass card" [routerLink]="['/product', product?.nombre]">
+  <!-- [ngClass]="{ 'mb-10 ': description == true }" -->
+
   <div class="rounded-xl glass items-center">
     <div class="flex">
       <div class="rounded-xl bg img-card">
@@ -36,17 +34,19 @@
         </p>
       </div>
 
-      <p
-        class="block font-sans text-sm antialiased font-normal leading-normal opacity-75"
-        (mouseenter)="toogleDescription(true)"
-        (mouseleave)="toogleDescription(false)"
-        [ngClass]="{
-          truncate: !description,
-          'whitespace-normal': description
-        }"
-      >
-        {{ limitarCaracteres(product!.descripcion, 100) }}
-      </p>
+      <!-- [ngClass]="{
+            truncate: !description,
+            'whitespace-normal': description
+          }" -->
+      <!-- (mouseenter)="toogleDescription(true)"
+          (mouseleave)="toogleDescription(false)" -->
+      <div class="max-w-72">
+        <span
+          class="font-sans text-sm antialiased font-normal opacity-75 whitespace-pre-wrap"
+        >
+          {{ limitarCaracteres(product!.descripcion, 80) }}
+        </span>
+      </div>
     </div>
     <div class="p-6 pt-0">
       <button
@@ -56,12 +56,17 @@
         Boton del numero de Warap
       </button>
     </div>
+
+    <div class="flex justify-around">
+      @if (deleteButton == true) {
+      <button class="text-white" (click)="sendData()">Eliminar</button>
+      <button
+        class="text-white"
+        [routerLink]="['/UpdateProduct', product?.nombre]"
+      >
+        Modificar
+      </button>
+      }
+    </div>
   </div>
 </div>
-@if (deleteButton == true) {
-<button class="text-white" (click)="sendData()">Eliminar</button>
-<button class="text-white" [routerLink]="['/UpdateProduct', product?.nombre]">
-  Modificar
-</button>
-
-}

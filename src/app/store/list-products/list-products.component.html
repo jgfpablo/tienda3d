@@ -1,6 +1,17 @@
+@if (isLoading && productsList == []) {
+<div class="spinner-container">
+  <div class="spinner"></div>
+</div>
+} @if (isDelayed && productsList == []) {
+<div class="delay-warning flex justify-center">
+  <p>Nuestros sistemas estan lentos. lamentamos el inconveniente</p>
+</div>
+
+<!-- @if(!isLoading && productsList.length > 0) -->
+} @if( productsList != []){
 <div class="w-5/6 flex flex-wrap justify-center mx-auto gap-8">
   <app-card-products
-    class="fade-in w-30"
+    class="fade-in md:w-30"
     *ngFor="let product of productsList"
     [product]="product"
     (textTruncated)="onChangeTruncated($event)"
@@ -9,7 +20,7 @@
   ></app-card-products>
 </div>
 
-<div class="flex justify-center mb-4">
+<div class="flex justify-center mb-4 mt-4">
   @if (totalPages != 0) { @for ( item of paginacion; track totalPages) {
   <button
     [ngClass]="{ 'bg-slate-300 ': item === paginate + 1 }"
@@ -20,6 +31,17 @@
   </button>
   } }
 </div>
+} @if (!isLoading && productsList.length ===0) {
+<div>
+  <span class="text-green-400 text-lg flex justify-center"
+    >Actualmente no hay productos en esta categoría. Lamentamos las molestias.
+    Si tiene alguna sugerencia, solicitud o petición para un nuevo producto, no
+    dude en contactarnos. Estaremos encantados de atenderle. Escríbanos a
+    nuestro WhatsApp:
+    <button><a href="https://wa.me/+543764172282?"></a></button>
+  </span>
+</div>
+}
 
 <app-alert
   [AlertStatus]="AlertStatus"
@@ -29,4 +51,3 @@
   [url]="url"
   (cleanForm)="cleanForm()"
 ></app-alert>
-<!-- (cleanForm)="cleanFormUser()" -->

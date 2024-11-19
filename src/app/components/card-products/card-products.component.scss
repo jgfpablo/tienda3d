@@ -29,3 +29,15 @@
   width: 350px;
   height: 350px;
 }
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transform: scale(1); /* Estado inicial */
+}
+
+/* Efectos al pasar el mouse */
+.card:hover {
+  transform: scale(1.05); /* Escala ligeramente */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
+  z-index: 10; /* Elevar el elemento visualmente */
+}

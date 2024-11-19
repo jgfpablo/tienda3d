@@ -27,6 +27,10 @@ export class ListProductsComponent implements OnInit {
   buttonText: string = '';
   url: string = '';
 
+  isLoading: boolean = true;
+  isDelayed: boolean = false;
+  delayTimer: any;
+
   constructor(
     private storeService: StoreService,
     private activatedRoute: ActivatedRoute,
@@ -34,6 +38,12 @@ export class ListProductsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.productsList = [];
+    this.delayTimer = setTimeout(() => {
+      if (this.isLoading) {
+        this.isDelayed = true;
+      }
+    }, 5000);
     this.activatedRoute.params.subscribe((params) => {
       this.paginate = 0;
       this.category = params['category'];
@@ -45,40 +55,59 @@ export class ListProductsComponent implements OnInit {
   }
   loadProducts(): void {
     if (this.category == 'allProducts') {
-      this.storeService.Paginar(this.paginate, '').subscribe((data) => {
-        this.productsList = data.data;
-        this.totalPages = Math.ceil(data.total / 6);
-        this.paginacion = Array.from(
-          { length: this.totalPages },
-          (_, index) => index + 1
-        );
-        console.log(this.paginate);
-      });
+      this.storeService.Paginar(this.paginate, '').subscribe(
+        (data) => {
+          // --
+          this.productsList = data.data;
+          // --
+          this.isLoading = false;
+          clearTimeout(this.delayTimer);
+          // --
+
+          this.totalPages = Math.ceil(data.total / 6);
+          this.paginacion = Array.from(
+            { length: this.totalPages },
+            (_, index) => index + 1
+          );
+        },
+        (error) => {
+          console.error('Error al cargar productos:', error);
+          this.isLoading = false;
+          this.isDelayed = true;
+        }
+      );
     } else if (this.search) {
-      this.storeService
-        .getSearch(this.search, this.paginate)
-        .subscribe((data) => {
-          console.log(data);
+      this.storeService.getSearch(this.search, this.paginate).subscribe(
+        (data) => {
           this.productsList = data.data;
           this.totalPages = Math.ceil(data.total / 6);
           this.paginacion = Array.from(
             { length: this.totalPages },
             (_, index) => index + 1
           );
-          console.log(this.paginate);
-        });
+        },
+        (error) => {
+          console.error('Error al cargar productos:', error);
+          this.isLoading = false;
+          this.isDelayed = true;
+        }
+      );
     } else {
-      this.storeService
-        .Paginar(this.paginate, this.category)
-        .subscribe((data) => {
+      this.storeService.Paginar(this.paginate, this.category).subscribe(
+        (data) => {
           this.productsList = data.data;
           this.totalPages = Math.ceil(data.total / 6);
           this.paginacion = Array.from(
             { length: this.totalPages },
             (_, index) => index + 1
           );
-          console.log(this.paginate);
-        });
+        },
+        (error) => {
+          console.error('Error al cargar productos:', error);
+          this.isLoading = false;
+          this.isDelayed = true;
+        }
+      );
     }
   }
 
@@ -89,6 +118,12 @@ export class ListProductsComponent implements OnInit {
   onChangeTruncated(truncated: boolean) {
     this.description = truncated;
   }
+
+  // delayTimer = setTimeout(() => {
+  //   if (this.isLoading) {
+  //     this.isDelayed = true;
+  //   }
+  // }, 5000);
 
   deletProduct(product: string) {
     this.storeService.deletProduct(product).subscribe(() => {

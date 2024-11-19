@@ -16,12 +16,12 @@ export class CardProductsComponent {
 
   @Output() textTruncated = new EventEmitter<boolean>();
 
-  description: boolean = false;
+  // description: boolean = false;
 
-  toogleDescription(value: boolean) {
-    this.description = value;
-    this.textTruncated.emit(this.description);
-  }
+  // toogleDescription(value: boolean) {
+  //   this.description = value;
+  //   this.textTruncated.emit(this.description);
+  // }
 
   limitarCaracteres(texto: string, limite: number): string {
     if (typeof texto !== 'string') {

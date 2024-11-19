@@ -1,4 +1,10 @@
 <div>
-  <input type="text" [(ngModel)]="data" name="data" placeholder="Buscar..." />
+  <input
+    type="text"
+    (keydown)="onKeyPress($event)"
+    [(ngModel)]="data"
+    name="data"
+    placeholder="Buscar..."
+  />
   <button class="text-white" (click)="buscar()">Buscar</button>
 </div>
