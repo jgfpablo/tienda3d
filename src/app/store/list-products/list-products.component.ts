@@ -29,7 +29,6 @@ export class ListProductsComponent implements OnInit {
 
   isLoading: boolean = true;
   isDelayed: boolean = false;
-  delayTimer: any;
 
   constructor(
     private storeService: StoreService,
@@ -39,12 +38,9 @@ export class ListProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.productsList = [];
-    this.delayTimer = setTimeout(() => {
-      if (this.isLoading) {
-        this.isDelayed = true;
-      }
-    }, 5000);
+
     this.activatedRoute.params.subscribe((params) => {
+      this.isLoading = true;
       this.paginate = 0;
       this.category = params['category'];
       this.search = params['search'];
@@ -57,12 +53,12 @@ export class ListProductsComponent implements OnInit {
     if (this.category == 'allProducts') {
       this.storeService.Paginar(this.paginate, '').subscribe(
         (data) => {
-          // --
+          this.delayTimer();
           this.productsList = data.data;
-          // --
+          console.log('data: ' + data);
+          console.log('productList: ' + this.productsList);
+
           this.isLoading = false;
-          clearTimeout(this.delayTimer);
-          // --
 
           this.totalPages = Math.ceil(data.total / 6);
           this.paginacion = Array.from(
@@ -79,7 +75,10 @@ export class ListProductsComponent implements OnInit {
     } else if (this.search) {
       this.storeService.getSearch(this.search, this.paginate).subscribe(
         (data) => {
+          this.delayTimer();
           this.productsList = data.data;
+          this.isLoading = false;
+
           this.totalPages = Math.ceil(data.total / 6);
           this.paginacion = Array.from(
             { length: this.totalPages },
@@ -95,7 +94,11 @@ export class ListProductsComponent implements OnInit {
     } else {
       this.storeService.Paginar(this.paginate, this.category).subscribe(
         (data) => {
+          this.delayTimer();
+
           this.productsList = data.data;
+          this.isLoading = false;
+
           this.totalPages = Math.ceil(data.total / 6);
           this.paginacion = Array.from(
             { length: this.totalPages },
@@ -119,12 +122,6 @@ export class ListProductsComponent implements OnInit {
     this.description = truncated;
   }
 
-  // delayTimer = setTimeout(() => {
-  //   if (this.isLoading) {
-  //     this.isDelayed = true;
-  //   }
-  // }, 5000);
-
   deletProduct(product: string) {
     this.storeService.deletProduct(product).subscribe(() => {
       this.AlertStatus = true;
@@ -133,6 +130,14 @@ export class ListProductsComponent implements OnInit {
       this.url = '/category/allProducts';
       this.buttonText = 'ir a allProducts';
     });
+  }
+
+  delayTimer() {
+    setTimeout(() => {
+      if (this.isLoading) {
+        this.isDelayed = true;
+      }
+    }, 5000);
   }
 
   cleanForm() {
