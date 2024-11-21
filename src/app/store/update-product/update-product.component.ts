@@ -65,7 +65,6 @@ export class UpdateProductComponent {
   getData(dataForm: Products) {
     this.product = dataForm;
 
-    //----------------
     this.storeService.updateProduct(this.product, this.name).subscribe(
       (resp: any) => {
         this.AlertStatus = true;
@@ -85,7 +84,6 @@ export class UpdateProductComponent {
   }
 
   cleanFormUser() {
-    //podes limpiar form
     this.AlertStatus = false;
   }
 }

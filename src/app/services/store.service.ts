@@ -29,7 +29,7 @@ export class StoreService {
       .pipe(catchError(this.handleError));
   }
   addConstData(dataConst: ConstData): Observable<ConstData> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -64,7 +64,7 @@ export class StoreService {
   }
 
   addProduct(product: Products): Observable<Products> {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -87,7 +87,7 @@ export class StoreService {
   }
 
   addCategory(category: Category) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -114,7 +114,7 @@ export class StoreService {
   }
 
   deleteCategory(category: string) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -138,7 +138,7 @@ export class StoreService {
   }
 
   deletProduct(product: string) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -149,7 +149,7 @@ export class StoreService {
   }
 
   addFilament(filament: Filament) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -162,7 +162,7 @@ export class StoreService {
   }
 
   deleteFilament(filament: string) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -179,7 +179,7 @@ export class StoreService {
   }
 
   updateProduct(product: Products, name: string) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -193,7 +193,7 @@ export class StoreService {
   }
 
   updateFilament(filament: Filament) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -203,7 +203,7 @@ export class StoreService {
   }
 
   updateCategory(category: Category) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { Category } from '../../Interfaces/category.interface';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -9,13 +10,22 @@ import { Router } from '@angular/router';
   styleUrl: './navbar.component.scss',
 })
 export class NavbarComponent {
-  constructor(private storeService: StoreService, private router: Router) {}
+  constructor(
+    private storeService: StoreService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   categories: Category[] = [];
-  open = false;
-  openMobile = false;
+  open: boolean = false;
+  openMobile: boolean = false;
+  auth: boolean = false;
+  acciones: boolean = false;
 
   ngOnInit(): void {
+    this.authService.getTokenTimeLeft();
+    this.auth = this.authService.isAuthenticated();
+
     this.storeService.getCategoriaEliminadaObservable().subscribe(() => {
       this.cargarCategorias();
     });
@@ -27,6 +37,10 @@ export class NavbarComponent {
 
   toggleMenu() {
     this.open = !this.open;
+  }
+
+  toggleMenuAcciones() {
+    this.acciones = !this.acciones;
   }
 
   toggleMenuMobile() {

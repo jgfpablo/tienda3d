@@ -42,7 +42,6 @@ export class UpdateCategoryComponent {
   }
 
   cleanForm() {
-    //podria limpiar el form
     this.AlertStatus = false;
   }
 
@@ -80,7 +79,7 @@ export class UpdateCategoryComponent {
         }
       };
     };
-    reader.readAsDataURL(this.image); // Leer la imagen como URL
+    reader.readAsDataURL(this.image);
   }
 
   eliminarImagen(num: number) {

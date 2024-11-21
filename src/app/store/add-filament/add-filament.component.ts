@@ -16,9 +16,7 @@ export class AddFilamentComponent {
   buttonText: string = '';
   url: string = '';
 
-  //filament
   filament: Filament = {
-    // marca: '',
     disponibilidad: true,
     color: '',
     imagenes: [],

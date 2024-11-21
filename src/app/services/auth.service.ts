@@ -27,22 +27,22 @@ export class AuthService {
       .post<Token>(`${this.apiUrl}/login`, { username, password })
       .pipe(
         tap((response: Token) => {
-          localStorage.setItem('token', response.token);
+          localStorage.setItem('NocturaToken', response.token);
         }),
         catchError(this.handleError)
       );
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('NocturaToken');
   }
 
   isAuthenticated(): boolean {
-    return !!localStorage.getItem('token');
+    return !!localStorage.getItem('NocturaToken');
   }
 
   register(userAndPassword: any) {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('NocturaToken');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,
     });
@@ -53,17 +53,7 @@ export class AuthService {
   }
 
   getTokenTimeLeft() {
-    // const token = localStorage.getItem('token') || '';
-    // const payloadBase64 = token.split('.')[1];
-    // const payload = JSON.parse(atob(payloadBase64));
-    // const expirationDate = payload.exp * 1000;
-    // const expirate = expirationDate - Date.now();
-    // if (expirate <= 0) {
-    //   this.logout();
-    //   this.router.navigate(['/login']);
-    // }
-
-    const token = localStorage.getItem('token') || '';
+    const token = localStorage.getItem('NocturaToken') || '';
 
     if (token.split('.').length !== 3) {
       this.logout();

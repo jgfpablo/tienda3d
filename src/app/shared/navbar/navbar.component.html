@@ -61,6 +61,99 @@
                 >Todos Los Productos</a
               >
 
+              <!-- +-------------- -->
+
+              @if(auth){
+              <div class="relative">
+                <button
+                  type="button"
+                  class="inline-flex w-32 rounded-md px-3 py-8 text-base font-medium text-green-400 hover:bg-gray-700 hover:text-white"
+                  id="dropdown-button"
+                  aria-expanded="true"
+                  aria-haspopup="true"
+                  (click)="toggleMenuAcciones()"
+                  [ngClass]="{
+                    'bg-gray-700 text-white': acciones == true
+                  }"
+                >
+                  Acciones
+                  <svg
+                    class="-mr-1 ml-2 h-5 w-5 mt-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4 4a.75.75 0 01-1.06 0l-4-4a.75.75 0 01.02-1.06z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  [ngClass]="{
+                    hidden: acciones == false,
+                    block: acciones == true
+                  }"
+                  class="absolute glass z-10"
+                  role="menu"
+                >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-base text-green-400 hover:text-white"
+                    [routerLink]="['/addProduct']"
+                    >Añadir Producto</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-base text-green-400 hover:text-white"
+                    [routerLink]="['/addConstantData']"
+                    >Data Constante</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-base text-green-400 hover:text-white"
+                    [routerLink]="['/addFilament']"
+                    >Añadir Filamento</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-base text-green-400 hover:text-white"
+                    [routerLink]="['/addCategory']"
+                    >Añadir categoria</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-base text-green-400 hover:text-white"
+                    [routerLink]="['/UpdateCategories']"
+                    >Modificar Categorias</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-base text-green-400 hover:text-white"
+                    [routerLink]="['/UpdateFilaments']"
+                    >Modificar Filamentos</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-base text-green-400 hover:text-white"
+                    [routerLink]="['/DeleteFilament']"
+                    >Eliminar Filamentos</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-base text-green-400 hover:text-white"
+                    [routerLink]="['/DeleteCategories']"
+                    >Eliminar Categorias</a
+                  >
+                </div>
+              </div>
+              }
+
+              <!-- --------------- -->
+
               <div class="relative">
                 <button
                   type="button"

@@ -119,21 +119,12 @@ export class ListProductsComponent implements OnInit {
     }
   }
 
-  // cambiarPagina(start: number) {
-  //   this.paginaActual = start;
-  //   this.paginate = start;
-
-  //   this.isLoading = true;
-  //   this.productsList = [];
-
-  //   this.loadProducts();
-  // }
   cambiarPagina(item: number) {
-    this.paginaActual = item; // Actualiza la página actual
-    this.paginate = item; // Asegúrate de que paginate también se actualiza
+    this.paginaActual = item;
+    this.paginate = item;
     this.isLoading = true;
     this.productsList = [];
-    this.loadProducts(); // Carga los productos de la nueva página
+    this.loadProducts();
     this.scrollToTop();
   }
   onChangeTruncated(truncated: boolean) {
@@ -161,26 +152,6 @@ export class ListProductsComponent implements OnInit {
   cleanForm() {
     this.AlertStatus = false;
   }
-
-  // generatePagination(paginate: number, totalPages: number, maxVisible = 6) {
-  //   const pages = [];
-  //   const half = Math.floor(maxVisible / 2);
-
-  //   let start = Math.max(1, paginate - half);
-  //   let end = Math.min(totalPages - 1, paginate + half);
-
-  //   if (paginate <= half) {
-  //     end = Math.min(totalPages, maxVisible);
-  //   } else if (paginate + half >= totalPages) {
-  //     start = Math.max(1, totalPages - maxVisible + 1);
-  //   }
-
-  //   for (let i = start; i <= end; i++) {
-  //     pages.push(i);
-  //   }
-
-  //   this.paginacion = pages;
-  // }
 
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });

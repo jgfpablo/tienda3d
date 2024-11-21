@@ -44,11 +44,6 @@ export class AddProductComponent {
     });
   }
 
-  // horas: number = 0;
-  // minutos: number = 0;
-  // tiempo: number = 0;
-  // peso: number = 0;
-
   product: Products = {
     nombre: '',
     descripcion: '',
@@ -115,14 +110,9 @@ export class AddProductComponent {
     this.product.multiplicador = dataForm.multiplicador;
 
     this.addProduct();
-
-    //DELEGAR A LA API
-    // this.calcularTiempo();
-    // this.product.precio = this.calcularPreciosProductos();
   }
 
   cleanFormUser() {
-    // this.userAndPassword.password = ''; resetear datos si quiero limpiar
     this.AlertStatus = false;
   }
 }
