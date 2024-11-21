@@ -1,28 +1,40 @@
-<div>
-  <div class="mb-4">
-    <label class="block text-grey-darker text-sm font-bold mb-2">Color</label>
-    <select
-      [(ngModel)]="selectedFilament"
-      class="border rounded py-2 px-3 w-full"
-    >
-      <option *ngFor="let fil of filaments" [ngValue]="fil">
-        {{ fil.color }}
-      </option>
-    </select>
-  </div>
+<div class="flex justify-center">
+  <div class="flex flex-col w-8/12 justify-center items-center glass mt-5">
+    <div class="mb-4">
+      <h1
+        class="block text-grey-darker text-xl text-center font-bold mb-2 text-green-400"
+      >
+        Color
+      </h1>
+      <select
+        [(ngModel)]="selectedFilament"
+        class="border rounded py-2 px-3 w-full"
+      >
+        <option *ngFor="let fil of filaments" [ngValue]="fil">
+          {{ fil.color }}
+        </option>
+      </select>
+    </div>
 
-  <div class="mb-4">
-    <label class="block text-grey-darker text-sm font-bold mb-2"
-      >Disponibilidad</label
+    <div class="mb-4">
+      <label
+        class="block text-grey-darker text-sm font-bold mb-2 text-green-400"
+        >Disponibilidad</label
+      >
+      <input
+        type="checkbox"
+        name="Disponibilidad"
+        [(ngModel)]="selectedFilament.disponibilidad"
+        id=""
+      />
+    </div>
+    <button
+      class="text-green-400 border m-4 p-2 glass"
+      (click)="updateFilament()"
     >
-    <input
-      type="checkbox"
-      name="Disponibilidad"
-      [(ngModel)]="selectedFilament.disponibilidad"
-      id=""
-    />
+      Actualizar
+    </button>
   </div>
-  <button (click)="updateFilament()">Actualizar</button>
 </div>
 
 <app-alert
