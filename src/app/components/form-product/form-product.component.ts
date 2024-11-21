@@ -37,10 +37,8 @@ export class FormProductComponent {
   };
 
   ngOnChanges(changes: SimpleChanges): void {
-    //separar el tamano (ancho alto grosor) por el espacio separandolo en los tipos de medida
     if (this.product.nombre != '') {
       this.dataForm = this.product;
-      console.log(this.product);
     }
     this.dataForm.alto = String(this.dataForm.alto).replace(/ .*/, '');
     this.dataForm.ancho = String(this.dataForm.ancho).replace(/ .*/, '');
@@ -116,15 +114,13 @@ export class FormProductComponent {
           const webpImage = canvas.toDataURL('image/webp', 0.8);
           this.imageBase64 = webpImage;
 
-          // this.imagenes.push(this.imageBase64);
           this.imagenes.unshift(this.imageBase64);
 
           this.imageBase64 = '';
         }
       };
     };
-    reader.readAsDataURL(this.image); // Leer la imagen como URL
-    console.log(this.imagenes);
+    reader.readAsDataURL(this.image);
   }
 
   quitarColor(num: number) {

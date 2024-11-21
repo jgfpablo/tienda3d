@@ -48,7 +48,6 @@ export class DeleteFilamentComponent {
           this.getFilaments();
         },
         (error) => {
-          console.log(error);
           this.AlertStatus = true;
           this.typeAlert = 'error';
           this.mensaje = error.alert;

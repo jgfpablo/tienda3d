@@ -48,7 +48,6 @@ export class DeleteCategoryComponent {
           this.getCategories();
         },
         (error) => {
-          console.log(error);
           this.AlertStatus = true;
           this.typeAlert = 'error';
           this.mensaje = error.alert;

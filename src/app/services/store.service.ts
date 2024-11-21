@@ -29,9 +29,9 @@ export class StoreService {
       .pipe(catchError(this.handleError));
   }
   addConstData(dataConst: ConstData): Observable<ConstData> {
-    const token = localStorage.getItem('token'); // O el método que uses para obtener el token
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Añadimos el token en el encabezado
+      Authorization: `Bearer ${token}`,
     });
 
     return this.httpClient
@@ -51,7 +51,7 @@ export class StoreService {
       )
       .pipe(catchError(this.handleError));
   }
-  // .get<Products[]>(`${this.apiUrl}products/search?name=${search}`)
+
   getSearch(search: string, paginate: number): Observable<ProductsPaginate> {
     let limit = 6;
     return this.httpClient
@@ -64,9 +64,9 @@ export class StoreService {
   }
 
   addProduct(product: Products): Observable<Products> {
-    const token = localStorage.getItem('token'); // O el método que uses para obtener el token
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Añadimos el token en el encabezado
+      Authorization: `Bearer ${token}`,
     });
 
     return this.httpClient
@@ -87,9 +87,9 @@ export class StoreService {
   }
 
   addCategory(category: Category) {
-    const token = localStorage.getItem('token'); // O el método que uses para obtener el token
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Añadimos el token en el encabezado
+      Authorization: `Bearer ${token}`,
     });
 
     category.nombre = this.formatString(category.nombre);
@@ -100,15 +100,12 @@ export class StoreService {
   }
 
   formatString(name: string): string {
-    // Verifica si 'name' es una cadena
     if (typeof name !== 'string') {
       throw new Error('El argumento debe ser una cadena de texto.');
     }
 
-    // Eliminar espacios y dividir en palabras
     const palabras = name.split(/\s+/);
 
-    // Capitalizar la primera letra de cada palabra y unirlas sin espacios
     const resultado = palabras
       .map((palabra) => palabra.charAt(0).toUpperCase() + palabra.slice(1))
       .join('');
@@ -148,18 +145,17 @@ export class StoreService {
 
     return this.httpClient
       .post(`${this.apiUrl}products/delete`, { nombre: product }, { headers })
-      .pipe(tap(console.log), catchError(this.handleError));
+      .pipe(catchError(this.handleError));
   }
 
   addFilament(filament: Filament) {
-    const token = localStorage.getItem('token'); // O el método que uses para obtener el token
+    const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
-      Authorization: `Bearer ${token}`, // Añadimos el token en el encabezado
+      Authorization: `Bearer ${token}`,
     });
 
     filament.color = this.formatString(filament.color);
 
-    console.log('filamento estado: ' + filament.disponibilidad);
     return this.httpClient
       .post(`${this.apiUrl}filaments/filament`, filament, { headers })
       .pipe(catchError(this.handleError));
@@ -183,7 +179,6 @@ export class StoreService {
   }
 
   updateProduct(product: Products, name: string) {
-    console.log('update product');
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders({
       Authorization: `Bearer ${token}`,

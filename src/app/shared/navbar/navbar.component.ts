@@ -31,7 +31,6 @@ export class NavbarComponent {
 
   toggleMenuMobile() {
     this.openMobile = !this.openMobile;
-    console.log(this.openMobile);
   }
 
   search(search: string) {

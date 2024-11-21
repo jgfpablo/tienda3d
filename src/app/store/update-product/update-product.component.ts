@@ -68,7 +68,6 @@ export class UpdateProductComponent {
     //----------------
     this.storeService.updateProduct(this.product, this.name).subscribe(
       (resp: any) => {
-        console.log(resp);
         this.AlertStatus = true;
         this.typeAlert = 'success';
         this.mensaje = `El producto fue actualizado con exito ${resp.data}`;

@@ -61,33 +61,14 @@ export class ProductComponent {
       this.filamentsAvaible.length > 0
     ) {
       for (let color of this.product.colores) {
-        // Iterar sobre los colores del producto
         for (let filament of this.filamentsAvaible) {
-          // Iterar sobre los filamentos disponibles
           if (filament.color === color && filament.disponibilidad) {
-            // Si el color coincide y el filamento está disponible, se agrega a la lista
             this.filamentosDisponibles.push(color);
-            console.log(this.filamentosDisponibles);
           }
         }
       }
-
-      console.log('Filamentos disponibles:', this.filamentosDisponibles);
     }
   }
-
-  // showImg(data: string) {
-  //   if (this.numberPhoto == this.photo && data == '+') {
-  //     this.numberPhoto = 0;
-  //     console.log(this.numberPhoto);
-  //   } else if (this.numberPhoto == 0 && data == '-') {
-  //     this.numberPhoto = this.photo;
-  //     console.log(this.numberPhoto);
-  //   } else {
-  //     this.numberPhoto += data === '+' ? 1 : -1;
-  //     console.log(this.numberPhoto);
-  //   }
-  // }
 
   showImgPhoto(number: number) {
     this.numberPhoto = number;

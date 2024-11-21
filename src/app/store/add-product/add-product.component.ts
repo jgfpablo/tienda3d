@@ -67,7 +67,6 @@ export class AddProductComponent {
   };
 
   addProduct() {
-    console.log(this.product);
     if (
       Object.values(this.product).every(
         (value) => value !== null && value !== ''
@@ -82,7 +81,6 @@ export class AddProductComponent {
           this.buttonText = 'Continuar Agregando productos';
         },
         (error) => {
-          console.log(error);
           this.AlertStatus = true;
           this.typeAlert = 'error';
           this.mensaje = error;
@@ -100,53 +98,6 @@ export class AddProductComponent {
     }
   }
 
-  // DELEGAR A API
-  // calcularPreciosProductos() {
-  //   const KwH =
-  //     (Number(this.dataConst![this.lengthDC]?.consumoKw) / 1000 / 60) *
-  //     Number(this.tiempo);
-
-  //   const costoEnergia = KwH * this.dataConst![this.lengthDC]?.costokwH!;
-
-  //   const costoFilamento =
-  //     (Number(this.peso) * Number(this.dataConst![this.lengthDC]?.filamento)) /
-  //     1000;
-  //   const depreciacion =
-  //     (Number(this.dataConst![this.lengthDC]?.costImpr) /
-  //       Number(this.dataConst![this.lengthDC]?.vidaUtil) /
-  //       60) *
-  //     Number(this.tiempo);
-  //   const merma =
-  //     (Number(this.peso) *
-  //       (Number(this.dataConst![this.lengthDC]?.merma) / 100) *
-  //       Number(this.dataConst![this.lengthDC]?.filamento)) /
-  //     1000;
-  //   const ganancia =
-  //     (costoEnergia + costoFilamento + depreciacion + merma) *
-  //     (this.dataConst![this.lengthDC]?.ganan! / 100);
-  //   const gastos = costoEnergia + costoFilamento + depreciacion + merma;
-
-  //   let total = gastos + ganancia;
-
-  //   if (total < 200) {
-  //     return (this.product.precio = 200);
-  //   } else {
-  //     return (this.product.precio = this.redondear(total));
-  //   }
-  // }
-
-  // DELEGAR A API
-
-  // redondear(numero: number): number {
-  //   const redondeo50 = Math.ceil(numero / 50) * 50;
-  //   return redondeo50 % 100 === 0 ? redondeo50 : redondeo50;
-  // }
-
-  // DELEGAR A API
-  // calcularTiempo() {
-  //   this.tiempo = Number(this.horas) * 60 + Number(this.minutos);
-  // }
-
   getData(dataForm: Products) {
     this.product.nombre = dataForm.nombre;
     this.product.descripcion = dataForm.descripcion;
@@ -162,7 +113,7 @@ export class AddProductComponent {
     this.product.grosor = dataForm.grosor;
     this.product.material = dataForm.material;
     this.product.multiplicador = dataForm.multiplicador;
-    console.log(dataForm.imagenes);
+
     this.addProduct();
 
     //DELEGAR A LA API
