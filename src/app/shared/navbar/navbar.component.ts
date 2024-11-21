@@ -13,6 +13,8 @@ export class NavbarComponent {
 
   categories: Category[] = [];
   open = false;
+  openMobile = false;
+
   ngOnInit(): void {
     this.storeService.getCategoriaEliminadaObservable().subscribe(() => {
       this.cargarCategorias();
@@ -25,6 +27,11 @@ export class NavbarComponent {
 
   toggleMenu() {
     this.open = !this.open;
+  }
+
+  toggleMenuMobile() {
+    this.openMobile = !this.openMobile;
+    console.log(this.openMobile);
   }
 
   search(search: string) {

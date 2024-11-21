@@ -8,7 +8,7 @@
           aria-controls="mobile-menu"
           aria-expanded="false"
         >
-          <span class="absolute -inset-0.5" (click)="toggleMenu()"></span>
+          <span class="absolute -inset-0.5" (click)="toggleMenuMobile()"></span>
 
           <svg
             class="block h-6 w-6"
@@ -61,13 +61,55 @@
                 >Todos Los Productos</a
               >
 
-              @for (category of categories; track $index) {
-              <a
-                class="block rounded-md px-3 py-8 text-base font-medium text-green-400 hover:bg-gray-700 hover:text-white"
-                [routerLink]="['/category', getCategoryName(category.nombre)]"
-                >{{ agregarEspacios(category.nombre) }}</a
-              >
-              }
+              <div class="relative">
+                <button
+                  type="button"
+                  class="inline-flex w-32 rounded-md px-3 py-8 text-base font-medium text-green-400 hover:bg-gray-700 hover:text-white"
+                  id="dropdown-button"
+                  aria-expanded="true"
+                  aria-haspopup="true"
+                  (click)="toggleMenu()"
+                  [ngClass]="{
+                    'bg-gray-700 text-white': open == true
+                  }"
+                >
+                  Categorias
+                  <svg
+                    class="-mr-1 ml-2 h-5 w-5 mt-1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4 4a.75.75 0 01-1.06 0l-4-4a.75.75 0 01.02-1.06z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </button>
+
+                <div
+                  [ngClass]="{
+                    hidden: open == false,
+                    block: open == true
+                  }"
+                  class="absolute glass z-10"
+                  role="menu"
+                >
+                  @for (category of categories; track $index) {
+                  <a
+                    class="block px-4 py-2 text-base text-green-400 hover:text-white"
+                    [routerLink]="[
+                      '/category',
+                      getCategoryName(category.nombre)
+                    ]"
+                    (click)="toggleMenu()"
+                    >{{ agregarEspacios(category.nombre) }}</a
+                  >
+                  }
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -78,21 +120,21 @@
       </div>
     </div>
 
-    <div class="sm:hidden" id="mobile-menu">
+    <div class="" id="mobile-menu">
       <div
         class="space-y-1 px-2 pb-3 pt-2"
-        [ngClass]="{ hidden: open == false, block: open == true }"
+        [ngClass]="{ hidden: openMobile == false, block: openMobile == true }"
       >
         <a
           href="#"
-          (click)="toggleMenu()"
+          (click)="toggleMenuMobile()"
           class="block rounded-md px-3 py-2 text-base font-medium text-green-200 hover:bg-gray-700 hover:text-white"
           >Inicio</a
         >
 
         <a
           href="#"
-          (click)="toggleMenu()"
+          (click)="toggleMenuMobile()"
           class="block rounded-md px-3 py-2 text-base font-medium text-green-200 hover:bg-gray-700 hover:text-white"
           [routerLink]="['/category', getCategoryName('')]"
           >Todos Los Productos</a
@@ -102,7 +144,7 @@
         <a
           class="block rounded-md px-3 py-2 text-base font-medium text-green-200 hover:bg-gray-700 hover:text-white"
           [routerLink]="['/category', getCategoryName(category.nombre)]"
-          (click)="toggleMenu()"
+          (click)="toggleMenuMobile()"
           >{{ category.nombre }}</a
         >
         }

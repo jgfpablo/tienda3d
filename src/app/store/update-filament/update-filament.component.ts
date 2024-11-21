@@ -24,20 +24,6 @@ export class UpdateFilamentComponent {
 
   filaments: Filament[] = [];
 
-  updateCheckboxState() {
-    // Actualiza automáticamente el checkbox según el valor seleccionado
-    console.log(
-      `Filamento seleccionado: ${this.selectedFilament.disponibilidad}`
-    );
-  }
-
-  onCheckboxChange() {
-    console.log(
-      `Estado actualizado para ${this.selectedFilament.disponibilidad}`
-    );
-    // Aquí puedes realizar acciones como guardar en una base de datos.
-  }
-
   constructor(
     private storeService: StoreService,
     private authService: AuthService

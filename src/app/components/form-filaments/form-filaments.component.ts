@@ -16,7 +16,6 @@ export class FormFilamentsComponent {
   filament: Filament = {
     color: '',
     disponibilidad: true,
-    // marca: '',
     imagenes: this.imagenes,
   };
 
@@ -54,11 +53,7 @@ export class FormFilamentsComponent {
         }
       };
     };
-    reader.readAsDataURL(this.image); // Leer la imagen como URL
-  }
-
-  toggleState() {
-    console.log('Nuevo estado:', this.filament.disponibilidad);
+    reader.readAsDataURL(this.image);
   }
 
   eliminarImagen(num: number) {

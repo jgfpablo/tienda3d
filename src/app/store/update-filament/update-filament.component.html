@@ -3,7 +3,6 @@
     <label class="block text-grey-darker text-sm font-bold mb-2">Color</label>
     <select
       [(ngModel)]="selectedFilament"
-      (change)="updateCheckboxState()"
       class="border rounded py-2 px-3 w-full"
     >
       <option *ngFor="let fil of filaments" [ngValue]="fil">
@@ -20,7 +19,6 @@
       type="checkbox"
       name="Disponibilidad"
       [(ngModel)]="selectedFilament.disponibilidad"
-      (change)="onCheckboxChange()"
       id=""
     />
   </div>

@@ -65,7 +65,6 @@ export class AddCategoryComponent {
   }
 
   cleanForm() {
-    //podria limpiar el form
     this.AlertStatus = false;
   }
 }

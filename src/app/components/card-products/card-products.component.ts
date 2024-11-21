@@ -16,23 +16,16 @@ export class CardProductsComponent {
 
   @Output() textTruncated = new EventEmitter<boolean>();
 
-  // description: boolean = false;
-
-  // toogleDescription(value: boolean) {
-  //   this.description = value;
-  //   this.textTruncated.emit(this.description);
-  // }
-
   limitarCaracteres(texto: string, limite: number): string {
     if (typeof texto !== 'string') {
       throw new Error('El argumento debe ser una cadena de texto.');
     }
 
     if (texto.length <= limite) {
-      return texto; // Devuelve el texto original si es más corto que el límite
+      return texto;
     }
 
-    return texto.slice(0, limite) + '...'; // Corta el texto y añade "..."
+    return texto.slice(0, limite) + '...';
   }
 
   sendData() {

@@ -53,7 +53,7 @@ export class FormCategoryComponent {
         }
       };
     };
-    reader.readAsDataURL(this.image); // Leer la imagen como URL
+    reader.readAsDataURL(this.image);
   }
 
   eliminarImagen(num: number) {
