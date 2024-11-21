@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { StoreService } from '../../services/store.service';
 import { ActivatedRoute } from '@angular/router';
 import { Products } from '../../Interfaces/products.interface';
@@ -27,11 +27,17 @@ export class ProductComponent {
 
   filamentosDisponibles: string[] = [];
 
+  isLoading: boolean = true;
+  isDelayed: boolean = true;
+
   ngOnInit(): void {
+    this.isLoading = true;
     this.name = this.activatedRoute.snapshot.paramMap.get('name')!;
 
     this.service.getProductByName(this.name).subscribe((resp) => {
+      this.delayTimer();
       this.product = resp[0];
+      this.isLoading = false;
 
       this.product.imagenes.reverse();
 
@@ -72,5 +78,13 @@ export class ProductComponent {
 
   showImgPhoto(number: number) {
     this.numberPhoto = number;
+  }
+
+  delayTimer() {
+    setTimeout(() => {
+      if (this.isLoading) {
+        this.isDelayed = true;
+      }
+    }, 5000);
   }
 }
