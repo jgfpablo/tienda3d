@@ -12,12 +12,10 @@ import { AuthService } from '../../services/auth.service';
 })
 export class ListProductsComponent implements OnInit {
   productsList: Products[] = [];
+
   description = false;
   category: string = '';
   search: string = '';
-  paginate = 0;
-  totalPages = 0;
-  paginacion: number[] = [];
   deleteButton: boolean = false;
 
   AlertStatus: boolean = false;
@@ -29,6 +27,12 @@ export class ListProductsComponent implements OnInit {
 
   isLoading: boolean = true;
   isDelayed: boolean = false;
+
+  paginate = 1;
+  totalPages = 0;
+  paginacion: number[] = [];
+
+  paginaActual = 1;
 
   constructor(
     private storeService: StoreService,
@@ -55,16 +59,14 @@ export class ListProductsComponent implements OnInit {
         (data) => {
           this.delayTimer();
           this.productsList = data.data;
-          console.log('data: ' + data);
-          console.log('productList: ' + this.productsList);
-
           this.isLoading = false;
-
           this.totalPages = Math.ceil(data.total / 6);
           this.paginacion = Array.from(
             { length: this.totalPages },
             (_, index) => index + 1
           );
+
+          this.generatePagination(this.paginate, this.totalPages);
         },
         (error) => {
           console.error('Error al cargar productos:', error);
@@ -84,6 +86,8 @@ export class ListProductsComponent implements OnInit {
             { length: this.totalPages },
             (_, index) => index + 1
           );
+
+          this.generatePagination(this.paginate, this.totalPages);
         },
         (error) => {
           console.error('Error al cargar productos:', error);
@@ -104,6 +108,7 @@ export class ListProductsComponent implements OnInit {
             { length: this.totalPages },
             (_, index) => index + 1
           );
+          this.generatePagination(this.paginate, this.totalPages);
         },
         (error) => {
           console.error('Error al cargar productos:', error);
@@ -114,9 +119,22 @@ export class ListProductsComponent implements OnInit {
     }
   }
 
-  cambiarPagina(start: number) {
-    this.paginate = start;
-    this.loadProducts();
+  // cambiarPagina(start: number) {
+  //   this.paginaActual = start;
+  //   this.paginate = start;
+
+  //   this.isLoading = true;
+  //   this.productsList = [];
+
+  //   this.loadProducts();
+  // }
+  cambiarPagina(item: number) {
+    this.paginaActual = item; // Actualiza la página actual
+    this.paginate = item; // Asegúrate de que paginate también se actualiza
+    this.isLoading = true;
+    this.productsList = [];
+    this.loadProducts(); // Carga los productos de la nueva página
+    this.scrollToTop();
   }
   onChangeTruncated(truncated: boolean) {
     this.description = truncated;
@@ -142,5 +160,53 @@ export class ListProductsComponent implements OnInit {
 
   cleanForm() {
     this.AlertStatus = false;
+  }
+
+  // generatePagination(paginate: number, totalPages: number, maxVisible = 6) {
+  //   const pages = [];
+  //   const half = Math.floor(maxVisible / 2);
+
+  //   let start = Math.max(1, paginate - half);
+  //   let end = Math.min(totalPages - 1, paginate + half);
+
+  //   if (paginate <= half) {
+  //     end = Math.min(totalPages, maxVisible);
+  //   } else if (paginate + half >= totalPages) {
+  //     start = Math.max(1, totalPages - maxVisible + 1);
+  //   }
+
+  //   for (let i = start; i <= end; i++) {
+  //     pages.push(i);
+  //   }
+
+  //   this.paginacion = pages;
+  // }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  generatePagination(paginate: number, totalPages: number, maxVisible = 6) {
+    const pages = [];
+    const half = Math.floor((maxVisible - 2) / 2);
+
+    let start = Math.max(2, paginate - half);
+    let end = Math.min(totalPages - 2, paginate + half);
+
+    if (paginate <= half + 1) {
+      end = Math.min(totalPages - 1, maxVisible - 1);
+    } else if (paginate + half >= totalPages) {
+      start = Math.max(2, totalPages - maxVisible + 2);
+    }
+
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+
+    if (totalPages > 1) {
+      this.paginacion = [1, ...pages, totalPages - 1];
+    } else {
+      this.paginacion = [1];
+    }
   }
 }

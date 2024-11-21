@@ -46,7 +46,7 @@
       >
         <div class="flex flex-shrink-0 items-center">
           <img
-            class="h-20 w-auto cursor-pointer"
+            class="h-20 w-auto cursor-pointer ml-10 md:ml-0"
             src="../../../assets/img/hero-logo.png"
             [routerLink]="['']"
           />
@@ -85,12 +85,14 @@
       >
         <a
           href="#"
+          (click)="toggleMenu()"
           class="block rounded-md px-3 py-2 text-base font-medium text-green-200 hover:bg-gray-700 hover:text-white"
           >Inicio</a
         >
 
         <a
           href="#"
+          (click)="toggleMenu()"
           class="block rounded-md px-3 py-2 text-base font-medium text-green-200 hover:bg-gray-700 hover:text-white"
           [routerLink]="['/category', getCategoryName('')]"
           >Todos Los Productos</a
@@ -100,6 +102,7 @@
         <a
           class="block rounded-md px-3 py-2 text-base font-medium text-green-200 hover:bg-gray-700 hover:text-white"
           [routerLink]="['/category', getCategoryName(category.nombre)]"
+          (click)="toggleMenu()"
           >{{ category.nombre }}</a
         >
         }

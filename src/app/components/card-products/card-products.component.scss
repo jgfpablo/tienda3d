@@ -41,3 +41,8 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Sombra más intensa */
   z-index: 10; /* Elevar el elemento visualmente */
 }
+
+.no-router-link {
+  pointer-events: none;
+  z-index: 2;
+}

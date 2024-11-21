@@ -7,7 +7,6 @@
   <p>Nuestros sistemas estan lentos lamentamos el inconveniente.</p>
 </div>
 
-<!-- @if(!isLoading && productsList.length > 0) -->
 } @if( productsList != []){
 <div class="w-5/6 flex flex-wrap justify-center mx-auto gap-8">
   <app-card-products
@@ -21,15 +20,17 @@
 </div>
 
 <div class="flex justify-center mb-4 mt-4">
-  @if (totalPages != 0) { @for ( item of paginacion; track totalPages) {
   <button
-    [ngClass]="{ 'bg-slate-300 ': item === paginate + 1 }"
+    *ngFor="let item of paginacion"
+    [ngClass]="{
+      'bg-slate-500': item === paginaActual,
+      'bg-gray-900': item !== paginaActual
+    }"
     class="relative glass inline-flex items-center px-4 py-2 text-sm font-semibold m-1"
-    (click)="cambiarPagina(item - 1)"
+    (click)="cambiarPagina(item)"
   >
     {{ item }}
   </button>
-  } }
 </div>
 } @if (!isLoading && productsList.length ===0) {
 <div>

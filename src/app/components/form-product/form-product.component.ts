@@ -32,7 +32,7 @@ export class FormProductComponent {
     alto: '',
     ancho: '',
     grosor: '',
-    material: '',
+    material: 'Plastico',
     multiplicador: 1,
   };
 
@@ -116,7 +116,9 @@ export class FormProductComponent {
           const webpImage = canvas.toDataURL('image/webp', 0.8);
           this.imageBase64 = webpImage;
 
-          this.imagenes.push(this.imageBase64);
+          // this.imagenes.push(this.imageBase64);
+          this.imagenes.unshift(this.imageBase64);
+
           this.imageBase64 = '';
         }
       };

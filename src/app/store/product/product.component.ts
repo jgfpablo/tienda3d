@@ -32,7 +32,9 @@ export class ProductComponent {
 
     this.service.getProductByName(this.name).subscribe((resp) => {
       this.product = resp[0];
-      console.log(this.product.grosor);
+
+      this.product.imagenes.reverse();
+
       this.photo = resp[0].imagenes?.length! - 1;
 
       this.productLoaded = true;
@@ -74,18 +76,18 @@ export class ProductComponent {
     }
   }
 
-  showImg(data: string) {
-    if (this.numberPhoto == this.photo && data == '+') {
-      this.numberPhoto = 0;
-      console.log(this.numberPhoto);
-    } else if (this.numberPhoto == 0 && data == '-') {
-      this.numberPhoto = this.photo;
-      console.log(this.numberPhoto);
-    } else {
-      this.numberPhoto += data === '+' ? 1 : -1;
-      console.log(this.numberPhoto);
-    }
-  }
+  // showImg(data: string) {
+  //   if (this.numberPhoto == this.photo && data == '+') {
+  //     this.numberPhoto = 0;
+  //     console.log(this.numberPhoto);
+  //   } else if (this.numberPhoto == 0 && data == '-') {
+  //     this.numberPhoto = this.photo;
+  //     console.log(this.numberPhoto);
+  //   } else {
+  //     this.numberPhoto += data === '+' ? 1 : -1;
+  //     console.log(this.numberPhoto);
+  //   }
+  // }
 
   showImgPhoto(number: number) {
     this.numberPhoto = number;

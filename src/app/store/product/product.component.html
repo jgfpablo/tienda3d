@@ -54,6 +54,12 @@
 
         <div class="flex justify-center items-center m-4">
           <p class="font-medium text-green-400">
+            Material: {{ product?.material }}
+          </p>
+        </div>
+
+        <div class="flex justify-center items-center m-4">
+          <p class="font-medium text-green-400">
             Medidas : Alto: {{ product?.alto }} - Ancho:
             {{ product?.ancho }} @if(product?.grosor !='0 mm' && product?.grosor
             !=' mm'){ - Grosor: {{ product?.grosor }} }
@@ -65,10 +71,14 @@
           <h3 class="text-green-400">Colores Disponibles</h3>
 
           <p class="font-medium text-green-700">
-            @for (item of filamentosDisponibles; track $index) {
-            {{ item }}
-            }
+            @for (item of filamentosDisponibles; track $index) { {{ item }} - }
           </p>
+        </div>
+        }@else{
+        <div class="flex flex-col justify-center items-center">
+          <h3 class="text-green-400">
+            Se encuentra disponible unicamente con los colores de la imagen
+          </h3>
         </div>
         }
 
