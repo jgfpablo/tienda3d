@@ -23,7 +23,6 @@ export class NavbarComponent {
   acciones: boolean = false;
 
   ngOnInit(): void {
-    this.authService.getTokenTimeLeft();
     this.auth = this.authService.isAuthenticated();
 
     this.storeService.getCategoriaEliminadaObservable().subscribe(() => {
