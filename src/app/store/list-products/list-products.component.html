@@ -19,12 +19,13 @@
   ></app-card-products>
 </div>
 
+@if(totalPages > 0 ){
 <div class="flex justify-center mb-4 mt-4">
   <button
     *ngFor="let item of paginacion"
     [ngClass]="{
-      'bg-slate-500': item === paginaActual,
-      'bg-gray-900': item !== paginaActual
+      'bg-slate-500': item - 1 === paginate,
+      'bg-gray-900': item - 1 !== paginate
     }"
     class="relative glass inline-flex items-center px-4 py-2 text-sm font-semibold m-1"
     (click)="cambiarPagina(item)"
@@ -32,10 +33,10 @@
     {{ item }}
   </button>
 </div>
-} @if (!isLoading && productsList.length ===0) {
+} } @if (!isLoading && productsList.length ===0) {
 <div>
   <div class="flex justify-center w-full">
-    <span class="text-green-400 text-lg w-8/12">
+    <span class="text-green-400 text-lg w-8/12 mt-32">
       Actualmente no hay productos en esta categoría. Lamentamos las molestias.
       Si tiene alguna sugerencia, solicitud o petición para un nuevo producto,
       no dude en contactarnos. Estaremos encantados de atenderle. Escríbanos a

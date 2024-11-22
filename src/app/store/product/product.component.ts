@@ -35,7 +35,6 @@ export class ProductComponent {
     this.name = this.activatedRoute.snapshot.paramMap.get('name')!;
 
     this.service.getProductByName(this.name).subscribe((resp) => {
-      this.delayTimer();
       this.product = resp[0];
       this.isLoading = false;
 
@@ -78,13 +77,5 @@ export class ProductComponent {
 
   showImgPhoto(number: number) {
     this.numberPhoto = number;
-  }
-
-  delayTimer() {
-    setTimeout(() => {
-      if (this.isLoading) {
-        this.isDelayed = true;
-      }
-    }, 5000);
   }
 }

@@ -41,7 +41,7 @@ const routes: Routes = [
     component: AddConstantDataComponent,
     canActivate: [authGuard],
   },
-  { path: 'register', component: RegisterComponent, canActivate: [authGuard] },
+  { path: 'register', component: RegisterComponent },
   {
     path: 'addCategory',
     component: AddCategoryComponent,

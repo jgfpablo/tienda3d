@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from '../../services/store.service';
-
 import { ActivatedRoute } from '@angular/router';
 import { Products } from '../../Interfaces/products.interface';
 import { AuthService } from '../../services/auth.service';
@@ -28,11 +27,9 @@ export class ListProductsComponent implements OnInit {
   isLoading: boolean = true;
   isDelayed: boolean = false;
 
-  paginate = 1;
+  paginate = 0;
   totalPages = 0;
   paginacion: number[] = [];
-
-  paginaActual = 1;
 
   constructor(
     private storeService: StoreService,
@@ -120,8 +117,7 @@ export class ListProductsComponent implements OnInit {
   }
 
   cambiarPagina(item: number) {
-    this.paginaActual = item;
-    this.paginate = item;
+    this.paginate = item - 1;
     this.isLoading = true;
     this.productsList = [];
     this.loadProducts();
@@ -175,7 +171,7 @@ export class ListProductsComponent implements OnInit {
     }
 
     if (totalPages > 1) {
-      this.paginacion = [1, ...pages, totalPages - 1];
+      this.paginacion = [1, ...pages, totalPages];
     } else {
       this.paginacion = [1];
     }

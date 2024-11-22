@@ -61,8 +61,6 @@
                 >Todos Los Productos</a
               >
 
-              <!-- +-------------- -->
-
               @if(auth){
               <div class="relative">
                 <button
@@ -104,48 +102,56 @@
                     href="#"
                     class="block px-4 py-2 text-base text-green-400 hover:text-white"
                     [routerLink]="['/addProduct']"
+                    (click)="toggleMenuAcciones()"
                     >Añadir Producto</a
                   >
                   <a
                     href="#"
                     class="block px-4 py-2 text-base text-green-400 hover:text-white"
                     [routerLink]="['/addConstantData']"
+                    (click)="toggleMenuAcciones()"
                     >Data Constante</a
                   >
                   <a
                     href="#"
                     class="block px-4 py-2 text-base text-green-400 hover:text-white"
                     [routerLink]="['/addFilament']"
+                    (click)="toggleMenuAcciones()"
                     >Añadir Filamento</a
                   >
                   <a
                     href="#"
                     class="block px-4 py-2 text-base text-green-400 hover:text-white"
                     [routerLink]="['/addCategory']"
+                    (click)="toggleMenuAcciones()"
                     >Añadir categoria</a
                   >
                   <a
                     href="#"
                     class="block px-4 py-2 text-base text-green-400 hover:text-white"
                     [routerLink]="['/UpdateCategories']"
+                    (click)="toggleMenuAcciones()"
                     >Modificar Categorias</a
                   >
                   <a
                     href="#"
                     class="block px-4 py-2 text-base text-green-400 hover:text-white"
                     [routerLink]="['/UpdateFilaments']"
+                    (click)="toggleMenuAcciones()"
                     >Modificar Filamentos</a
                   >
                   <a
                     href="#"
                     class="block px-4 py-2 text-base text-green-400 hover:text-white"
                     [routerLink]="['/DeleteFilament']"
+                    (click)="toggleMenuAcciones()"
                     >Eliminar Filamentos</a
                   >
                   <a
                     href="#"
                     class="block px-4 py-2 text-base text-green-400 hover:text-white"
                     [routerLink]="['/DeleteCategories']"
+                    (click)="toggleMenuAcciones()"
                     >Eliminar Categorias</a
                   >
                 </div>

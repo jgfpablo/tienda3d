@@ -19,7 +19,7 @@ export class RegisterComponent {
   url: string = '';
 
   ngOnInit(): void {
-    this.authService.getTokenTimeLeft();
+    // this.authService.getTokenTimeLeft();
   }
 
   userAndPassword = {
