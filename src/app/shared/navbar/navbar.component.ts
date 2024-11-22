@@ -48,6 +48,7 @@ export class NavbarComponent {
 
   search(search: string) {
     this.router.navigate(['/search', search]);
+    //
   }
 
   getCategoryName(name: string) {

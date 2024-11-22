@@ -1,16 +1,16 @@
 <div class="glass card" [routerLink]="['/product', product?.nombre]">
   <div class="rounded-xl glass items-center">
     <div class="flex">
-      <div class="rounded-xl bg img-card flex justify-center items-center">
+      <div class="rounded-xl bg flex justify-center items-center">
         @if(product && product.imagenes && product.imagenes.length > 0){
         <img
           [src]="product.imagenes[product.imagenes.length - 1]"
           alt="card-image"
-          class="object-contain"
+          class="object-scale-down md:w-96"
         />
         }@else {
         <img
-          src="https://images.unsplash.com/photo-1629367494173-c78a56567877?ixlib=rb-4.0.3&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=927&amp;q=80"
+          src="../../../assets/img/Noctura.jpg"
           alt="card-image"
           class="object-contain center mx-auto my-auto"
         />
@@ -19,10 +19,8 @@
     </div>
 
     <div class="px-6 pb-6 pt-2">
-      <div class="flex items-center justify-between w21 mb-2">
-        <p
-          class="flex font-sans text-base antialiased font-medium leading-relaxed product-title product-title break-words"
-        >
+      <div class="flex items-center justify-between mb-2">
+        <p class="truncate w-40 md:w-64">
           {{ product?.nombre }}
         </p>
         <p

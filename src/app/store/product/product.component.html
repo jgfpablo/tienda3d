@@ -11,7 +11,7 @@
   >
     <div class="flex flex-col md:w-5/12">
       <div class="flex flex-wrap md:flex-nowrap">
-        @if(product && product.imagenes && product.imagenes.length > 0){
+        @if(product && product.imagenes ){
         <div class="flex flex-row w-full md:w-2/12 justify-center">
           <div class="flex flex-wrap md:inline-flex md:flex-wrap content-start">
             @if(product && product.imagenes && product.imagenes.length > 0){
@@ -29,12 +29,24 @@
 
         <div class="flex justify-center md:w-full md:m-5">
           <div class="flex justify-center items-center w-full">
+            @if(product.imagenes.length == 0){
+            <img
+              src="../../../assets/img/Noctura.jpg"
+              class="object-cover bg w-96 h-96 md:w-full md:h-auto m-auto"
+              alt="card-image"
+              loading="lazy"
+            />
+
+            }@else {
+
             <img
               [src]="product.imagenes[numberPhoto]"
               class="object-cover bg w-96 h-96 md:w-full md:h-auto m-auto"
               alt="card-image"
               loading="lazy"
             />
+
+            }
           </div>
         </div>
         }

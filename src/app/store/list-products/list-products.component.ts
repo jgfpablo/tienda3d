@@ -158,7 +158,7 @@ export class ListProductsComponent implements OnInit {
     const half = Math.floor((maxVisible - 2) / 2);
 
     let start = Math.max(2, paginate - half);
-    let end = Math.min(totalPages - 2, paginate + half);
+    let end = Math.min(totalPages - 1, paginate + half);
 
     if (paginate <= half + 1) {
       end = Math.min(totalPages - 1, maxVisible - 1);
